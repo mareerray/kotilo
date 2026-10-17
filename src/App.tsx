@@ -17,12 +17,16 @@ function App() {
     setItems([...items, newItem]);
   }
 
+  function handleDeleteItem(delId: number) {
+    setItems(items.filter(item => item.id !== delId));
+  }
+
   return (
     <div>
       <h1>Kotilo</h1>
       <ItemForm onAdd={handleAddItem} />
       {items.map((item) => (
-        <ItemCard key={item.id} item={item} />
+        <ItemCard key={item.id} item={item} onDelete={handleDeleteItem} />
       ))}
 
     </div>
