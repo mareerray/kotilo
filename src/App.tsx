@@ -21,12 +21,16 @@ function App() {
     setItems(items.filter(item => item.id !== delId));
   }
 
+  function handleUpdateItem(updatedItem: Item) {
+    setItems(items.map(item => item.id === updatedItem.id ? updatedItem : item));
+  }
+
   return (
     <div>
       <h1>Kotilo</h1>
       <ItemForm onAdd={handleAddItem} />
       {items.map((item) => (
-        <ItemCard key={item.id} item={item} onDelete={handleDeleteItem} />
+        <ItemCard key={item.id} item={item} onDelete={handleDeleteItem} onUpdate={handleUpdateItem} />
       ))}
 
     </div>

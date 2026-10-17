@@ -3,6 +3,7 @@ import type {Item} from "../types/item";
 
 type ItemFormProps = {
     onAdd: (item: Item) => void;
+    onUpdate?: (item: Item) => void;
 };
 
 function ItemForm({onAdd}: ItemFormProps) {
