@@ -1,9 +1,16 @@
-function ItemCard () {
+import type { Item } from '../types/item';
+
+type ItemCardProps = {
+    item: Item;
+};
+
+function ItemCard ({item}: ItemCardProps) {
     return (
         <div>
-            <h2>Bookshelf</h2>
-            <p>Category: Furniture</p>
-            <p>Condition: Good</p>
+            <h2>{item.name}</h2>
+            <p>Category: {item.category}</p>
+            <p>Color: {item.color}</p>
+            <p>Condition: {item.condition}</p>
         </div>
     );
 }
