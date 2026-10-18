@@ -1,8 +1,12 @@
 import { supabase } from './supabase';
 import type { Item } from '../types/item';
 
-export type NewItem = Omit<Item, 'id'>; // Omit<Item, "id"> uses whatever fields your type has.
+// A new item has no id yet: the database creates it.
+// Omit<Item, "id"> uses whatever fields your type has.
+export type NewItem = Omit<Item, 'id'>; 
 
+
+// Read all items, newest first.
 export async function getItems(): Promise<Item[]> {
     const { data, error } = await supabase
     .from('items')
@@ -12,6 +16,8 @@ export async function getItems(): Promise<Item[]> {
     return data || [];
 }
 
+
+// Insert one row and return it, including its new id.
 export async function addItem(newItem: NewItem): Promise<Item> {
     const { data, error } = await supabase
     .from('items')
@@ -22,10 +28,11 @@ export async function addItem(newItem: NewItem): Promise<Item> {
     return data;
 }
 
-export async function updateItem(id: number, updatedItem: Partial<Item>): Promise<Item> {
+// Update only the row where id matches. Never send id in the changes.
+export async function updateItem(id: number, changes: Partial<NewItem>): Promise<Item> {
     const { data, error } = await supabase
     .from('items')
-    .update(updatedItem)
+    .update(changes)
     .eq('id', id) // a filter to update the row where id equals this id
     .select()
     .single();

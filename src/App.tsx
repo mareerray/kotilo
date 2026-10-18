@@ -1,23 +1,18 @@
 import { useEffect, useState } from 'react';
-import { getItems, updateItem } from './lib/itemsApi';
+import { getItems, addItem, updateItem, deleteItem } from './lib/itemsApi';
 import type { NewItem } from './lib/itemsApi';
 import type { Item } from './types/item';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
 
-// const initialItems: Item[] = [
-//   { id: 1, name: "Bookshelf", category: "Living room", color: "Brown", width_cm: 100, height_cm: 200, depth_cm: 30, photo_path: null, condition: "Good" },
-//   { id: 2, name: "Sofa", category: "Living room", color: "Blue", width_cm: 150, height_cm: 80, depth_cm: 90, photo_path: null, condition: "Good" },
-//   { id: 3, name: "Floor lamp", category: "Living room", color: "White", width_cm: 20, height_cm: 120, depth_cm: 20, photo_path: null, condition: "Fair" },
-//   { id: 4, name: "Bedside table", category: "Bedroom", color: "Wooden", width_cm: 50, height_cm: 40, depth_cm: 40, photo_path: null, condition: "Good" },
-// ];
 
 function App() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Load items once, when the page opens.
   useEffect(() => {
     getItems()
     .then(setItems)
@@ -25,12 +20,23 @@ function App() {
     .finally(() => setLoading(false));
   }, []);
 
-  function handleAddItem(newItem: Item) {
-    setItems([...items, newItem]);
+  // Save first, then update the screen with the row from the database.
+  async function handleAddItem(newItem: NewItem) {
+    try {
+      const savedItem = await addItem(newItem);
+        setItems(prev => [savedItem, ...prev]);
+    } catch (e) {
+      setError((e as Error).message);
+    }
   }
 
-  function handleDeleteItem(delId: number) {
-    setItems(items.filter(item => item.id !== delId));
+  async function handleDeleteItem(delId: number) {
+    try {
+      await deleteItem(delId);
+      setItems(prev => prev.filter(item => item.id !== delId));
+    } catch (e) {
+      setError((e as Error).message);
+    }
   }
 
   async function handleUpdateItem(id: number, updatedItem: Partial<NewItem>) {
@@ -65,3 +71,12 @@ function App() {
   );
 }
 export default App
+
+
+
+// const initialItems: Item[] = [
+//   { id: 1, name: "Bookshelf", category: "Living room", color: "Brown", width_cm: 100, height_cm: 200, depth_cm: 30, photo_path: null, condition: "Good" },
+//   { id: 2, name: "Sofa", category: "Living room", color: "Blue", width_cm: 150, height_cm: 80, depth_cm: 90, photo_path: null, condition: "Good" },
+//   { id: 3, name: "Floor lamp", category: "Living room", color: "White", width_cm: 20, height_cm: 120, depth_cm: 20, photo_path: null, condition: "Fair" },
+//   { id: 4, name: "Bedside table", category: "Bedroom", color: "Wooden", width_cm: 50, height_cm: 40, depth_cm: 40, photo_path: null, condition: "Good" },
+// ];

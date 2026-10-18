@@ -1,9 +1,8 @@
 import { useState } from "react";
-import type { Item } from "../types/item";
+import type { NewItem } from "../lib/itemsApi";
 
 type ItemFormProps = {
-    onAdd: (item: Item) => void;
-    onUpdate?: (item: Item) => void;
+    onAdd: (item: NewItem) => void;
 };
 
 function ItemForm({ onAdd }: ItemFormProps) {
@@ -13,7 +12,6 @@ function ItemForm({ onAdd }: ItemFormProps) {
     const [width, setWidth] = useState<number | null>(null);
     const [height, setHeight] = useState<number | null>(null);
     const [depth, setDepth] = useState<number | null>(null);
-    const [photoPath, setPhotoPath] = useState<string | null>(null);
     const [condition, setCondition] = useState("Good");
     const [error, setError] = useState("");
 
@@ -25,13 +23,8 @@ function ItemForm({ onAdd }: ItemFormProps) {
             setError("Measurements cannot be negative.");
             return;
         }
-        if (photoPath && !photoPath.startsWith("http")) {
-            setError("Invalid photo path.");
-            return;
-        }
 
         onAdd({
-            id: Date.now(),
             name: name.trim(),
             category: category.trim(),
             color: color.trim(),
@@ -48,7 +41,6 @@ function ItemForm({ onAdd }: ItemFormProps) {
         setWidth(null);
         setHeight(null);
         setDepth(null);
-        setPhotoPath(null);
         setCondition("Good");
     }
 
@@ -96,12 +88,6 @@ function ItemForm({ onAdd }: ItemFormProps) {
                 placeholder="Depth (cm)"
                 value={depth ?? ""}
                 onChange={(e) => setDepth(e.target.value ? parseFloat(e.target.value) : null)}
-            />
-            <input
-                type="text"
-                placeholder="Photo Path (URL)"
-                value={photoPath ?? ""}
-                onChange={(e) => setPhotoPath(e.target.value || null)}
             />
             <select value={condition} onChange={(e) => setCondition(e.target.value)}>
                 <option value="New">New</option>
