@@ -17,7 +17,7 @@ TypeScript and Supabase.
 - [x] Step 2: Item type, props and list
 - [x] Step 3: Add item form
 - [x] Step 4: Edit and delete
-- [ ] Step 5: Save data in Supabase
+- [x] Step 5: Save data in Supabase
 - [ ] Step 6: Photo upload
 - [ ] Step 7: Search and filter
 - [ ] Step 8: Mobile-friendly and PWA
