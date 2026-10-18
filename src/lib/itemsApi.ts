@@ -26,7 +26,7 @@ export async function updateItem(id: number, updatedItem: Partial<Item>): Promis
     const { data, error } = await supabase
     .from('items')
     .update(updatedItem)
-    .eq('id', id)
+    .eq('id', id) // a filter to update the row where id equals this id
     .select()
     .single();
     if (error) throw error;
@@ -38,6 +38,6 @@ export async function deleteItem(id: number): Promise<void> {
     const { error } = await supabase
     .from('items')
     .delete()
-    .eq('id', id);
+    .eq('id', id); // a filter to delete the row where id equals this id
     if (error) throw error;
 }
