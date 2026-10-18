@@ -16,7 +16,7 @@ TypeScript and Supabase.
 - [x] Step 1: Project setup and first `ItemCard` component
 - [x] Step 2: Item type, props and list
 - [x] Step 3: Add item form
-- [ ] Step 4: Edit and delete
+- [x] Step 4: Edit and delete
 - [ ] Step 5: Save data in Supabase
 - [ ] Step 6: Photo upload
 - [ ] Step 7: Search and filter

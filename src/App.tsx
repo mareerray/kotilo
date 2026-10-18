@@ -4,10 +4,10 @@ import ItemForm from './components/ItemForm';
 import type { Item } from './types/item';
 
 const initialItems: Item[] = [
-  { id: 1, name: "Bookshelf", category: "Furniture", color: "Brown", condition: "Good" },
-  { id: 2, name: "Sofa", category: "Furniture", color: "Blue", condition: "Good" },
-  { id: 3, name: "Floor lamp", category: "Lighting", color: "White", condition: "Fair" },
-  { id: 4, name: "Bedside table", category: "Furniture", color: "Wooden", condition: "Good" },
+  { id: 1, name: "Bookshelf", category: "Furniture", color: "Brown", width_cm: 100, height_cm: 200, depth_cm: 30, photo_path: null, condition: "Good" },
+  { id: 2, name: "Sofa", category: "Furniture", color: "Blue", width_cm: 150, height_cm: 80, depth_cm: 90, photo_path: null, condition: "Good" },
+  { id: 3, name: "Floor lamp", category: "Lighting", color: "White", width_cm: 20, height_cm: 120, depth_cm: 20, photo_path: null, condition: "Fair" },
+  { id: 4, name: "Bedside table", category: "Furniture", color: "Wooden", width_cm: 50, height_cm: 40, depth_cm: 40, photo_path: null, condition: "Good" },
 ];
 
 function App() {
