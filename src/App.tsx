@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getItems, addItem, updateItem, deleteItem } from './lib/itemsApi';
 import type { NewItem } from './lib/itemsApi';
 import type { Item } from './types/item';
+import kotiloIcon from './assets/kotilo-icon.png';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
@@ -52,7 +53,10 @@ function App() {
 
   return (
     <div>
-      <h1>Kotilo</h1>
+      <h1 className="app-title">
+        <img src={kotiloIcon} alt="Kotilo Icon" className="logo" />
+        Kotilo
+      </h1>
       {error && <p>Error: {error}</p>}
       <ItemForm onAdd={handleAddItem} />
       {items.map((item) => (

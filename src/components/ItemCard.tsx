@@ -18,7 +18,7 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
 
     return (
         isEditing ? (
-            <div>
+            <div className="item-card">
                 <input value={draftItem.name} onChange={(e) => setDraftItem({ ...draftItem, name: e.target.value })} />
                 <input value={draftItem.category} onChange={(e) => setDraftItem({ ...draftItem, category: e.target.value })} />
                 <input value={draftItem.color} onChange={(e) => setDraftItem({ ...draftItem, color: e.target.value })} />
@@ -56,7 +56,7 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
         ) : (
             <div>
 
-                <div>
+                <div className="item-card">
                     <h2>{item.name}</h2>
                     <p>Category: {item.category}</p>
                     <p>Color: {item.color}</p>
