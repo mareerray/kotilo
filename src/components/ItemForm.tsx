@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { NewItem } from "../lib/itemsApi";
 
 type ItemFormProps = {
-    onAdd: (item: NewItem, photoFile: File | null) => void;
+    onAdd: (item: NewItem, photoFile: File | null) => Promise<void>;
 };
 
 function ItemForm({ onAdd }: ItemFormProps) {
@@ -15,8 +15,9 @@ function ItemForm({ onAdd }: ItemFormProps) {
     const [photoFile, setPhotoFile] = useState<File | null>(null);
     const [condition, setCondition] = useState("Good");
     const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    function handleSubmit(event: React.FormEvent) {
+    async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         setError("");
         if (!name.trim()) return;
@@ -28,8 +29,9 @@ function ItemForm({ onAdd }: ItemFormProps) {
             setError("A photo is required.");
             return;
         }
+        setIsSubmitting(true);
 
-        onAdd({
+        await onAdd({
             name: name.trim(),
             category: category.trim(),
             color: color.trim(),
@@ -40,6 +42,7 @@ function ItemForm({ onAdd }: ItemFormProps) {
             condition: condition,
         }, photoFile);
 
+        setIsSubmitting(false);
         setName("");
         setCategory("");
         setColor("");
@@ -106,7 +109,9 @@ function ItemForm({ onAdd }: ItemFormProps) {
                 <option value="Fair">Fair</option>
                 <option value="Poor">Poor</option>
             </select>
-            <button type="submit">Add Item</button>
+            <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Adding..." : "Add Item"}
+            </button>
         </form>
     );
 }

@@ -1,5 +1,5 @@
 const MAX_SIZE = 1600; // the longest side is at most 1600px
-const QUALITY = 0.85; // JPEG at 85% quality
+const QUALITY = 0.90; // JPEG at 90% quality
 
 export async function resizeImage(file: File): Promise<File> {
     try {

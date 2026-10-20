@@ -73,10 +73,12 @@ function App() {
         finalChanges.photo_path = await uploadPhoto(newPhoto);
       }
 
+      
+
       const savedItem = await updateItem(id, finalChanges);
       setItems((prev) => prev.map((item) => (item.id === id ? savedItem : item)));
 
-      if (newPhoto && oldPath) {
+      if (oldPath && oldPath !== savedItem.photo_path) {
         await supabase.storage.from('item-photos').remove([oldPath]);
       }
     } catch (e) {
@@ -101,7 +103,7 @@ function App() {
           onDelete={handleDeleteItem}
           onUpdate={(updatedItem, newPhoto) => {
             const { id, ...changes } = updatedItem;
-            handleUpdateItem(id, changes, newPhoto);
+            return handleUpdateItem(id, changes, newPhoto);
           }}
         />
       ))}

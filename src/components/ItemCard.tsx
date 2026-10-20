@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Item } from '../types/item';
 import { supabase } from '../lib/supabase';
+import PhotoLoadingStatus from '../lib/photoLoadingStatus';
 
 type ItemCardProps = {
     item: Item;
@@ -10,6 +11,7 @@ type ItemCardProps = {
 
 function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
     const [isEditing, setIsEditing] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
     const [draftItem, setDraftItem] = useState<Item>(item);
     const [newPhoto, setNewPhoto] = useState<File | null>(null);
 
@@ -29,8 +31,10 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
         setIsEditing(false);
     }
 
-    function handleSave() {
-        onUpdate(draftItem, newPhoto);
+    async function handleSave() {
+        setIsSaving(true);
+        await onUpdate(draftItem, newPhoto);
+        setIsSaving(false);
         setNewPhoto(null);
         setIsEditing(false);
     }
@@ -44,9 +48,20 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
             <article className="item-card item-card--edit">
                 <h2>Edit item</h2>
 
-                {photoUrl && (
+                {draftItem.photo_path && (
                     <div className="item-card__photo-area">
-                        <img src={photoUrl} alt={item.name} className="item-photo" />
+                        <PhotoLoadingStatus
+                            key={draftItem.photo_path}
+                            src={supabase.storage.from('item-photos').getPublicUrl(draftItem.photo_path).data.publicUrl}
+                            alt={item.name}
+                        />
+                        <button
+                            type="button"
+                            className="item-card__delete"
+                            onClick={() => setDraftItem({ ...draftItem, photo_path: null })}
+                        >
+                            Remove photo
+                        </button>
                     </div>
                 )}
 
@@ -139,8 +154,9 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
                 </label>
 
                 <div className="item-card__actions">
-                    <button type="button" onClick={handleSave}>Save</button>
-                    <button type="button" onClick={cancelEditing}>Cancel</button>
+                    <button type="button" onClick={handleSave} disabled={isSaving}>
+                        {isSaving ? 'Saving...' : 'Save'}
+                    </button>                    <button type="button" onClick={cancelEditing}>Cancel</button>
                 </div>
             </article>
         );
@@ -156,8 +172,7 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
             {photoUrl ? (
                 <div className="item-card__photo-area">
                     <div className="item-card__photo-stage">
-                        <img src={photoUrl} alt={item.name} className="item-photo" />
-                        {/* Measurement annotations will go here in Step 7. */}
+                        <PhotoLoadingStatus key={photoUrl} src={photoUrl} alt={item.name} />                        {/* Measurement annotations will go here in Step 7. */}
                     </div>
                 </div>
             ) : (

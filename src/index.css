@@ -157,6 +157,50 @@ button:active {
 }
 
 /* ******************************************
+ * Photo loading spinner styles
+ ********************* */
+
+.spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #fce7f3;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.photo-frame {
+  position: relative;
+  width: 100%;
+}
+
+.photo-frame--loading,
+.photo-frame--error {
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+}
+
+.photo-frame--loading .item-photo {
+  position: absolute;
+  opacity: 0;
+}
+
+.photo-frame--error .item-photo {
+  display: none;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ******************************************
  * Item card styles
  ********************* */
 
