@@ -4,10 +4,12 @@ import { resizeImage } from './lib/resizeImage';
 import type { NewItem } from './lib/itemsApi';
 import type { Item } from './types/item';
 import type { Annotation } from './types/annotation';
-import kotiloIcon from './assets/kotilo-icon.png';
 import { supabase } from './lib/supabase';
 import { updateAnnotations } from './lib/itemsApi';
 import StatsBar from './components/StatesBar';
+import AppHeader from './components/AppHeader';
+import AboutKotilo from './components/AboutKotilo';
+import AppFooter from './components/AppFooter';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
@@ -131,49 +133,71 @@ function App() {
   // Show loading message while items are being fetched from the database.
   if (loading) return <p>Loading...</p>;
 
-return (
-  <div className="app-shell">
-    <h1 className="app-title">
-      <img src={kotiloIcon} alt="Kotilo Icon" className="logo" />
-      Kotilo
-    </h1>
+  return (
+    <div className="app-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
 
-    {error && <p className="form-error">Error: {error}</p>}
+      <AppHeader />
 
-    <StatsBar items={items} />
+      <main id="main-content">
+        <section className="dashboard-intro">
+          <p className="section-eyebrow">Your personal storage dashboard</p>
+          <h1>A little order. A little peace of mind.</h1>
+          <p>
+            Know what you have, keep measurements close,
+            and make room for what matters.
+          </p>
+        </section>
 
-    <ItemForm onAdd={handleAddItem} />
+        <section id="inventory" aria-labelledby="inventory-title">
+          <h2 className="inventory-heading" id="inventory-title">
+            My inventory
+          </h2>
 
-    <ItemFilters
-      search={search}
-      category={categoryFilter}
-      condition={conditionFilter}
-      categories={categories}
-      onSearchChange={setSearch}
-      onCategoryChange={setCategoryFilter}
-      onConditionChange={setConditionFilter}
-      onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
-    />
+          {error && <p className="form-error">Error: {error}</p>}
 
-    <p className="results-note">Showing {visibleItems.length} of {items.length} items</p>
-    {visibleItems.length === 0 && <p className="results-note">No items match your filters.</p>}
+          <StatsBar items={items} />
 
-    <div className="items-grid">
-      {visibleItems.map((item) => (
-        <ItemCard
-          key={item.id}
-          item={item}
-          onDelete={handleDeleteItem}
-          onAnnotationsChange={handleAnnotationsChange}
-          onUpdate={(updatedItem, newPhoto) => {
-            const { id, ...changes } = updatedItem;
-            return handleUpdateItem(id, changes, newPhoto);
-          }}
-        />
-      ))}
+          <ItemForm onAdd={handleAddItem} />
+
+          <ItemFilters
+            search={search}
+            category={categoryFilter}
+            condition={conditionFilter}
+            categories={categories}
+            onSearchChange={setSearch}
+            onCategoryChange={setCategoryFilter}
+            onConditionChange={setConditionFilter}
+            onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
+          />
+
+          <p className="results-note">Showing {visibleItems.length} of {items.length} items</p>
+          {visibleItems.length === 0 && <p className="results-note">No items match your filters.</p>}
+
+          <div className="items-grid">
+            {visibleItems.map((item) => (
+              <ItemCard
+                key={item.id}
+                item={item}
+                onDelete={handleDeleteItem}
+                onAnnotationsChange={handleAnnotationsChange}
+                onUpdate={(updatedItem, newPhoto) => {
+                  const { id, ...changes } = updatedItem;
+                  return handleUpdateItem(id, changes, newPhoto);
+                }}
+              />
+            ))}
+          </div>
+        </section>
+        <AboutKotilo />
+      </main>
+
+      <AppFooter />
     </div>
-  </div>
-);
+  );
 }
+
 export default App
 

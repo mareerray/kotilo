@@ -1,0 +1,231 @@
+/* Header */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f5e1ec;
+}
+
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.site-brand img {
+    display: block;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.site-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-nav a:hover {
+    background: var(--accent-soft);
+}
+
+/* Introduction */
+.dashboard-intro {
+    padding: 36px 0 28px;
+    max-width: 700px;
+}
+
+.section-eyebrow {
+    margin: 0 0 8px;
+    color: #7a2b52;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.dashboard-intro h1 {
+    margin: 0 0 12px;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.2;
+}
+
+.dashboard-intro > p:last-child {
+    margin: 0;
+    color: #746a80;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.inventory-heading {
+    margin: 0 0 16px;
+    font-size: 1.3rem;
+}
+
+/* About section */
+.about-kotilo {
+    margin-top: 40px;
+    padding: 28px;
+    border: 1px solid #f5e1ec;
+    border-radius: var(--radius);
+    background: var(--card);
+}
+
+.about-kotilo h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.about-kotilo__intro {
+    max-width: 65ch;
+    margin: 0;
+    color: #746a80;
+    line-height: 1.7;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.about-features h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.about-features p {
+    margin: 0;
+    color: #746a80;
+    line-height: 1.7;
+}
+
+/* Footer */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 32px;
+    padding: 24px 0;
+    border-top: 1px solid #f5e1ec;
+    color: #746a80;
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0 0 6px;
+}
+
+.site-footer__brand {
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.site-footer__meta {
+    text-align: right;
+}
+
+.site-footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    color: #7a2b52;
+    text-underline-offset: 4px;
+}
+
+/* Keyboard navigation */
+.site-brand:focus-visible,
+.site-nav a:focus-visible,
+.site-footer a:focus-visible {
+    outline: 3px solid #7a2b52;
+    outline-offset: 4px;
+}
+
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: var(--text);
+    color: white;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+#inventory,
+#about {
+    scroll-margin-top: 16px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .site-header {
+        gap: 8px;
+    }
+
+    .site-brand {
+        font-size: 1.4rem;
+    }
+
+    .site-brand img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .site-nav {
+        gap: 0;
+    }
+
+    .site-nav a {
+        padding: 8px 10px;
+    }
+
+    .dashboard-intro {
+        padding: 28px 0 24px;
+    }
+
+    .about-kotilo {
+        margin-top: 28px;
+        padding: 20px;
+    }
+
+    .about-features {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .site-footer {
+        flex-direction: column;
+    }
+
+    .site-footer__meta {
+        text-align: left;
+    }
+}
