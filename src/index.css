@@ -22,7 +22,7 @@ body {
   gap: 12px;
   font-size: 2rem;
   margin: 24px auto 16px;
-  width: min(640px, 92%);
+  width: min(840px, 92%);
 }
 
 .logo {
@@ -42,7 +42,7 @@ body {
 }
 
 form {
-  width: min(640px, 92%);
+  width: min(840px, 92%);
   margin: 0 auto 24px;
   background: var(--card);
   padding: 16px;
@@ -201,6 +201,22 @@ button:disabled {
 }
 
 /* ******************************************
+ * Item filters styles
+ ********************* */
+.item-filters, .field-note {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px auto;
+    width: min(840px, 92%);
+}
+
+.item-filters input[type="search"] {
+    flex: 1 1 200px;
+}
+
+/* ******************************************
  * Item card styles
  ********************* */
 
@@ -213,7 +229,7 @@ button:disabled {
 
 /* Shared card container, including edit mode. */
 .item-card {
-  width: min(640px, 92%);
+  width: min(840px, 92%);
   margin: 0 auto 24px;
   padding: 20px;
   background: var(--card, #ffffff);

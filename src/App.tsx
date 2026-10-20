@@ -10,11 +10,15 @@ import { updateAnnotations } from './lib/itemsApi';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
+import ItemFilters from './components/ItemFilters';
 
 
 function App() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [conditionFilter, setConditionFilter] = useState('');
   const [error, setError] = useState("");
 
   // Load items once, when the page opens.
@@ -113,6 +117,16 @@ function App() {
     }
   }
 
+  const categories = [...new Set(items.map((item) => item.category).filter(Boolean))].sort();
+
+  const visibleItems = items.filter((item) => {
+    const text = `${item.name} ${item.description} ${item.category} ${item.color}`.toLowerCase();
+    const matchesSearch = text.includes(search.trim().toLowerCase());
+    const matchesCategory = !categoryFilter || item.category === categoryFilter;
+    const matchesCondition = !conditionFilter || item.condition === conditionFilter;
+    return matchesSearch && matchesCategory && matchesCondition;
+  });
+
   // Show loading message while items are being fetched from the database.
   if (loading) return <p>Loading...</p>;
 
@@ -124,7 +138,21 @@ function App() {
       </h1>
       {error && <p>Error: {error}</p>}
       <ItemForm onAdd={handleAddItem} />
-      {items.map((item) => (
+      <ItemFilters
+  search={search}
+  category={categoryFilter}
+  condition={conditionFilter}
+  categories={categories}
+  onSearchChange={setSearch}
+  onCategoryChange={setCategoryFilter}
+  onConditionChange={setConditionFilter}
+  onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
+/>
+
+<p className="field-note">Showing {visibleItems.length} of {items.length} items</p>
+
+{visibleItems.length === 0 && <p>No items match your filters.</p>}
+      {visibleItems.map((item) => (
         <ItemCard
           key={item.id}
           item={item}
