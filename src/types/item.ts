@@ -13,4 +13,5 @@ export type Item = {
     condition: string;
     price: number | null;
     annotations: Annotation[];
+    for_sale: boolean;
 };

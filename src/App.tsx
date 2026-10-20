@@ -7,6 +7,7 @@ import type { Annotation } from './types/annotation';
 import kotiloIcon from './assets/kotilo-icon.png';
 import { supabase } from './lib/supabase';
 import { updateAnnotations } from './lib/itemsApi';
+import StatsBar from './components/StatesBar';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
@@ -130,28 +131,34 @@ function App() {
   // Show loading message while items are being fetched from the database.
   if (loading) return <p>Loading...</p>;
 
-  return (
-    <div>
-      <h1 className="app-title">
-        <img src={kotiloIcon} alt="Kotilo Icon" className="logo" />
-        Kotilo
-      </h1>
-      {error && <p>Error: {error}</p>}
-      <ItemForm onAdd={handleAddItem} />
-      <ItemFilters
-  search={search}
-  category={categoryFilter}
-  condition={conditionFilter}
-  categories={categories}
-  onSearchChange={setSearch}
-  onCategoryChange={setCategoryFilter}
-  onConditionChange={setConditionFilter}
-  onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
-/>
+return (
+  <div className="app-shell">
+    <h1 className="app-title">
+      <img src={kotiloIcon} alt="Kotilo Icon" className="logo" />
+      Kotilo
+    </h1>
 
-<p className="field-note">Showing {visibleItems.length} of {items.length} items</p>
+    {error && <p className="form-error">Error: {error}</p>}
 
-{visibleItems.length === 0 && <p>No items match your filters.</p>}
+    <StatsBar items={items} />
+
+    <ItemForm onAdd={handleAddItem} />
+
+    <ItemFilters
+      search={search}
+      category={categoryFilter}
+      condition={conditionFilter}
+      categories={categories}
+      onSearchChange={setSearch}
+      onCategoryChange={setCategoryFilter}
+      onConditionChange={setConditionFilter}
+      onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
+    />
+
+    <p className="results-note">Showing {visibleItems.length} of {items.length} items</p>
+    {visibleItems.length === 0 && <p className="results-note">No items match your filters.</p>}
+
+    <div className="items-grid">
       {visibleItems.map((item) => (
         <ItemCard
           key={item.id}
@@ -164,9 +171,9 @@ function App() {
           }}
         />
       ))}
-
     </div>
-  );
+  </div>
+);
 }
 export default App
 

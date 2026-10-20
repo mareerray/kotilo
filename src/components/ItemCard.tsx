@@ -1,3 +1,4 @@
+import { Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { Annotation } from '../types/annotation';
@@ -167,6 +168,15 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
                     />
                 </label>
 
+                <label className="field checkbox">
+                    <input
+                        type="checkbox"
+                        checked={draftItem.for_sale}
+                        onChange={(e) => setDraftItem({ ...draftItem, for_sale: e.target.checked })}
+                    />
+                    Planning to sell
+                </label>
+
                 <label className="field">
                     Condition
                     <select
@@ -192,24 +202,19 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
     return (
         /* ---------------------------View Mode----------------------------- */
         <article className="item-card item-card--view">
-            <header className="item-card__header">
-                <h2>{item.name}</h2>
-                <span className="item-card__condition">{item.condition}</span>
-                {item.price != null && (
-                    <span className="item-card__price">
-                        {new Intl.NumberFormat('fi-FI', { style: 'currency', currency: 'EUR' }).format(item.price)}
-                    </span>
-                )}
-            </header>
-
             {photoUrl ? (
                 <div className="item-card__photo-area">
                     <div className="item-card__photo-stage">
                         <PhotoAnnotator
+                            key={photoUrl}
                             annotations={item.annotations}
                             onChange={(next) => onAnnotationsChange(item.id, next)}
                         >
-                            <PhotoLoadingStatus key={photoUrl} src={photoUrl} alt={item.name} />
+                            <PhotoLoadingStatus
+                                key={photoUrl}
+                                src={photoUrl}
+                                alt={item.name}
+                            />
                         </PhotoAnnotator>
                     </div>
                 </div>
@@ -217,35 +222,39 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
                 <div className="item-card__no-photo">No photo yet</div>
             )}
 
+            <h2 className="item-card__title">{item.name}</h2>
+
+            <div className="item-card__badges">
+                <span className={`item-card__condition item-card__condition--${item.condition.toLowerCase()}`}>
+                    {item.condition}
+                </span>
+                {item.for_sale && <span className="item-card__sale">For sale</span>}
+                {item.price != null && (
+                    <p className="item-card__price">
+                        {new Intl.NumberFormat('fi-FI', { style: 'currency', currency: 'EUR' }).format(item.price)}
+                    </p>
+                )}</div>
+
+
+
             <dl className="item-card__measurements">
-                <div>
-                    <dt>Width</dt>
-                    <dd>{item.width_cm != null ? `${item.width_cm} cm` : '—'}</dd>
-                </div>
-                <div>
-                    <dt>Height</dt>
-                    <dd>{item.height_cm != null ? `${item.height_cm} cm` : '—'}</dd>
-                </div>
-                <div>
-                    <dt>Depth</dt>
-                    <dd>{item.depth_cm != null ? `${item.depth_cm} cm` : '—'}</dd>
-                </div>
+                <div><dt>Width</dt><dd>{item.width_cm != null ? `${item.width_cm} cm` : '—'}</dd></div>
+                <div><dt>Height</dt><dd>{item.height_cm != null ? `${item.height_cm} cm` : '—'}</dd></div>
+                <div><dt>Depth</dt><dd>{item.depth_cm != null ? `${item.depth_cm} cm` : '—'}</dd></div>
             </dl>
 
             <div className="item-card__details">
-                {item.description && <p>{item.description}</p>} |
-                <p>Category: {item.category || 'Not specified'}</p> |
-                <p>Color: {item.color || 'Not specified'}</p>
+                <p>{item.category || 'No category'} </p> |
+                <p> {item.color || 'No color'}</p> |
+                {item.description && <p>{item.description}</p>}
             </div>
 
             <footer className="item-card__actions">
-                <button type="button" onClick={startEditing}>Edit</button>
-                <button
-                    type="button"
-                    className="item-card__delete"
-                    onClick={() => onDelete(item.id)}
-                >
-                    Delete
+                <button type="button" className="btn" onClick={startEditing}>
+                    <Pencil size={16} /> Edit
+                </button>
+                <button type="button" className="btn btn--danger" onClick={() => onDelete(item.id)}>
+                    <Trash2 size={16} /> Delete
                 </button>
             </footer>
         </article>

@@ -18,8 +18,13 @@ function ItemForm({ onAdd }: ItemFormProps) {
     const [depth, setDepth] = useState<number | null>(null);
     const [photoFile, setPhotoFile] = useState<File | null>(null);
     const [condition, setCondition] = useState("Good");
+    const [forSale, setForSale] = useState(false);
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    function numberValue(value: string) {
+        return value ? parseFloat(value) : null;
+    }
 
     async function handleSubmit(event: React.SubmitEvent) {
         event.preventDefault();
@@ -49,8 +54,10 @@ function ItemForm({ onAdd }: ItemFormProps) {
             height_cm: height,
             depth_cm: depth,
             photo_path: null,
-            annotations: [],
             condition: condition,
+            for_sale: forSale,
+            annotations: [],
+
         }, photoFile);
 
         setIsSubmitting(false);
@@ -63,83 +70,68 @@ function ItemForm({ onAdd }: ItemFormProps) {
         setHeight(null);
         setDepth(null);
         setCondition("Good");
+        setForSale(false);
         setPhotoFile(null);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            {error && <p role="alert">{error}</p>}
-            <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Color"
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-            />
-            <input
-                type="number"
-                min="0"
-                step="any"
-                placeholder="Width (cm)"
-                value={width ?? ""}
-                onChange={(e) => setWidth(e.target.value ? parseFloat(e.target.value) : null)}
-            />
-            <input
-                type="number"
-                min="0"
-                step="any"
-                placeholder="Height (cm)"
-                value={height ?? ""}
-                onChange={(e) => setHeight(e.target.value ? parseFloat(e.target.value) : null)}
-            />
-            <input
-                type="number"
-                min="0"
-                step="any"
-                placeholder="Depth (cm)"
-                value={depth ?? ""}
-                onChange={(e) => setDepth(e.target.value ? parseFloat(e.target.value) : null)}
-            />
-            <input
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="Price (€)"
-                value={price ?? ""}
-                onChange={(e) => setPrice(e.target.value ? parseFloat(e.target.value) : null)}
-            />
-            <textarea
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-        
-            <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setPhotoFile(e.target.files ? e.target.files[0] : null)}
-            />
-            <select value={condition} onChange={(e) => setCondition(e.target.value)}>
-                <option value="New">New</option>
-                <option value="Good">Good</option>
-                <option value="Fair">Fair</option>
-                <option value="Poor">Poor</option>
-            </select>
-            <button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Adding..." : "Add Item"}
-            </button>
-        </form>
+        <details className="add-panel">
+            <summary>+ Add item</summary>
+            <form className="add-form" onSubmit={handleSubmit}>
+                {error && <p role="alert" className="form-error">{error}</p>}
+
+                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                <input type="text" placeholder="Color" value={color} onChange={(e) => setColor(e.target.value)} />
+                <input
+                    type="number" min="0" step="0.01" placeholder="Price (€)"
+                    value={price ?? ""} onChange={(e) => setPrice(numberValue(e.target.value))}
+                />
+                <input
+                    type="number" min="0" step="any" placeholder="Width (cm)"
+                    value={width ?? ""} onChange={(e) => setWidth(numberValue(e.target.value))}
+                />
+                <input
+                    type="number" min="0" step="any" placeholder="Height (cm)"
+                    value={height ?? ""} onChange={(e) => setHeight(numberValue(e.target.value))}
+                />
+                <input
+                    type="number" min="0" step="any" placeholder="Depth (cm)"
+                    value={depth ?? ""} onChange={(e) => setDepth(numberValue(e.target.value))}
+                />
+
+                <div className="add-form__wide add-form__row">
+                    <select value={condition} onChange={(e) => setCondition(e.target.value)}>
+                        <option value="New">New</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+
+                    <label className="checkbox">
+                        <input type="checkbox" checked={forSale} onChange={(e) => setForSale(e.target.checked)} />
+                        Planning to sell
+                    </label>
+                </div>
+
+                <textarea
+                    className="add-form__wide"
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                <input
+                    className="add-form__wide"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setPhotoFile(e.target.files ? e.target.files[0] : null)}
+                />
+
+                <button className="btn btn--primary add-form__wide" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Adding..." : "Add Item"}
+                </button>
+            </form>
+        </details>
     );
 }
 

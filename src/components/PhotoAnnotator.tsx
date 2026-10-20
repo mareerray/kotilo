@@ -15,9 +15,11 @@ function PhotoAnnotator({ annotations, onChange, children }: PhotoAnnotatorProps
     const [end, setEnd] = useState<Point | null>(null);
     const [label, setLabel] = useState('');
     const [value, setValue] = useState('');
+    const [imageRatio, setImageRatio] = useState<number | null>(null);
+    const frameHeight = 390;
 
     function handleClick(e: React.MouseEvent<HTMLDivElement>) {
-        if (end) return; // both points chosen, waiting for the form
+        if (end || imageRatio === null) return; // both points chosen, waiting for the form
         const rect = e.currentTarget.getBoundingClientRect();
         const point = {
             x: ((e.clientX - rect.left) / rect.width) * 100,
@@ -54,8 +56,24 @@ function PhotoAnnotator({ annotations, onChange, children }: PhotoAnnotatorProps
     }
 
     return (
-        <div>
-            <div className="annotator" onClick={handleClick}>
+        <div
+            className="annotator-frame"
+            style={{ height: frameHeight }}
+            onLoadCapture={(event) => {
+                const image = event.target;
+
+                if (image instanceof HTMLImageElement && image.naturalHeight > 0) {
+                    setImageRatio(image.naturalWidth / image.naturalHeight);
+                }
+            }}
+        >
+            <div className="annotator" onClick={handleClick}
+                style={{
+                    width: imageRatio === null
+                        ? '100%'
+                        : `min(100%, ${frameHeight * imageRatio}px)`,
+                }}
+            >
                 {children}
 
                 <svg className="annotator__lines" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -88,6 +106,7 @@ function PhotoAnnotator({ annotations, onChange, children }: PhotoAnnotatorProps
 
                 {start && <span className="dot dot--draft" style={{ left: `${start.x}%`, top: `${start.y}%` }} />}
                 {end && <span className="dot dot--draft" style={{ left: `${end.x}%`, top: `${end.y}%` }} />}
+                
             </div>
 
             {start && !end && <p className="field-note">Now tap the second point.</p>}

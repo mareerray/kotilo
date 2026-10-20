@@ -1,3 +1,5 @@
+import { Search } from 'lucide-react';
+
 type ItemFiltersProps = {
     search: string;
     category: string;
@@ -15,12 +17,15 @@ function ItemFilters({
 }: ItemFiltersProps) {
     return (
         <div className="item-filters">
-            <input
-                type="search"
-                placeholder="Search items..."
-                value={search}
-                onChange={(e) => onSearchChange(e.target.value)}
-            />
+            <label className="search-box">
+                <Search size={18} />
+                <input
+                    type="search"
+                    placeholder="Search items..."
+                    value={search}
+                    onChange={(e) => onSearchChange(e.target.value)}
+                />
+            </label>
 
             <select value={category} onChange={(e) => onCategoryChange(e.target.value)}>
                 <option value="">All categories</option>
@@ -37,7 +42,7 @@ function ItemFilters({
                 <option value="Poor">Poor</option>
             </select>
 
-            <button type="button" onClick={onClear}>Clear</button>
+            <button type="button" className="btn" onClick={onClear}>Clear</button>
         </div>
     );
 }
