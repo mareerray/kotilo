@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getItems, addItem, updateItem, deleteItem } from './lib/itemsApi';
+import { resizeImage } from './lib/resizeImage';
 import type { NewItem } from './lib/itemsApi';
 import type { Item } from './types/item';
 import kotiloIcon from './assets/kotilo-icon.png';
@@ -24,12 +25,13 @@ function App() {
 
   // Upload the photo to Supabase Storage and return the public URL.
   async function uploadPhoto(file: File): Promise<string> {
+    const resized = await resizeImage(file);
     const ext = file.name.split('.').pop() ?? 'jpg';
     const path = `${crypto.randomUUID()}.${ext}`;
 
     const { error } = await supabase.storage
       .from('item-photos')
-      .upload(path, file);
+      .upload(path, resized);
 
     if (error) {
       throw new Error(error.message);
@@ -109,11 +111,3 @@ function App() {
 }
 export default App
 
-
-
-// const initialItems: Item[] = [
-//   { id: 1, name: "Bookshelf", category: "Living room", color: "Brown", width_cm: 100, height_cm: 200, depth_cm: 30, photo_path: null, condition: "Good" },
-//   { id: 2, name: "Sofa", category: "Living room", color: "Blue", width_cm: 150, height_cm: 80, depth_cm: 90, photo_path: null, condition: "Good" },
-//   { id: 3, name: "Floor lamp", category: "Living room", color: "White", width_cm: 20, height_cm: 120, depth_cm: 20, photo_path: null, condition: "Fair" },
-//   { id: 4, name: "Bedside table", category: "Bedroom", color: "Wooden", width_cm: 50, height_cm: 40, depth_cm: 40, photo_path: null, condition: "Good" },
-// ];
