@@ -31,6 +31,16 @@ body {
   object-fit: contain;
 }
 
+/* ******************************************
+ * Item form styles
+ ********************* */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 form {
   width: min(640px, 92%);
   margin: 0 auto 24px;
@@ -38,20 +48,36 @@ form {
   padding: 16px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /*gives the mobile layout one column that is allowed to shrink.*/
   gap: 12px;
+}
+
+/*lets every grid child shrink below its default content size*/
+form > * {
+  min-width: 0;
+}
+
+form input,
+form select,
+form button {
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (min-width: 600px) {
   form {
     padding: 20px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   form input[type="text"],
+  form input[type="file"],
   form select,
-  form button {
-    grid-column: span 2;
+  form button,
+  form [role="alert"] {
+    grid-column: 1 / -1;
   }
 }
 
@@ -79,7 +105,7 @@ button {
 }
 
 button:hover {
-  transform: scale(1.03);
+  transform: none;
 }
 
 button:active {
@@ -93,49 +119,215 @@ button:active {
   border-radius: 10px;
 }
 
-.item-card {
-  width: min(640px, 92%);
-  margin: 0 auto 16px;
-  background: var(--card);
-  padding: 16px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+.item-card--edit h2 {
+  margin: 0;
+}
+
+.field {
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  color: #746a80;
+  font-size: 0.9rem;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.field-note {
+  margin: 0;
+  color: #746a80;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 400px) {
+  .field-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ******************************************
+ * Item card styles
+ ********************* */
+
+/* Include padding and borders inside the declared width. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Shared card container, including edit mode. */
+.item-card {
+  width: min(640px, 92%);
+  margin: 0 auto 24px;
+  padding: 20px;
+  background: var(--card, #ffffff);
+  color: var(--text, #4a3f6b);
+  border-radius: 20px;
+  box-shadow: var(
+    --shadow,
+    0 8px 24px rgba(249, 168, 212, 0.18)
+  );
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Name and condition */
+.item-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
 }
 
-.item-card img {
+.item-card__header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.item-card__condition {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fce7f3;
+  color: #713654;
+  font-size: 0.85rem;
+}
+
+/* Large photo area */
+.item-card__photo-area {
+  padding: 12px;
+  border: 1px solid #f0e5ed;
+  border-radius: 16px;
+  background: #fbf8fa;
+}
+
+/*
+ * The stage follows the image's natural proportions.
+ * Later, the annotation layer will sit directly over it.
+ */
+.item-card__photo-stage {
+  position: relative;
   width: 100%;
-  max-width: 240px;
+}
+
+.item-card .item-photo {
+  display: block;
+  width: 100%;
+  max-width: none;
   height: auto;
+  border-radius: 10px;
+}
+
+/* Items without photos */
+.item-card__no-photo {
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  padding: 24px;
+  border: 2px dashed #ead9e6;
+  border-radius: 16px;
+  background: #fbf8fa;
+  color: #746a80;
+}
+
+/* Three measurement tiles */
+.item-card__measurements {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.item-card__measurements > div {
+  padding: 12px 8px;
   border-radius: 12px;
-  object-fit: cover;
+  background: #fff3f8;
+  text-align: center;
 }
 
-@media (min-width: 600px) {
+.item-card__measurements dt {
+  margin-bottom: 6px;
+  color: #746a80;
+  font-size: 0.85rem;
+}
+
+.item-card__measurements dd {
+  margin: 0;
+  color: #4a3f6b;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* Secondary details */
+.item-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+
+.item-card__details p {
+  margin: 0;
+  color: #746a80;
+  font-size: 0.9rem;
+}
+
+/* Keep buttons inside the card. */
+.item-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.item-card__actions button {
+  width: auto;
+  min-height: 44px;
+  padding: 10px 18px;
+  background: #fce7f3;
+  color: #4a3f6b;
+}
+
+.item-card__actions .item-card__delete {
+  background: #fff0ee;
+  color: #943e38;
+}
+
+/* Edit fields should not overflow the card. */
+.item-card > input,
+.item-card > select {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 400px) {
   .item-card {
-    flex-direction: row;
-    align-items: flex-start;
+    padding: 14px;
+    gap: 14px;
   }
 
-  .item-card img {
-    width: 160px;
-    flex-shrink: 0;
+  .item-card__photo-area {
+    padding: 8px;
   }
-}
 
-.item-card h2 {
-  margin: 0 0 4px;
-}
-
-.item-card p {
-  margin: 2px 0;
-  color: var(--muted);
-}
-
-.item-card button {
-  background: var(--accent-soft);
-  color: var(--text);
-  font-weight: 600;
+  .item-card__actions button {
+    flex: 1;
+  }
 }

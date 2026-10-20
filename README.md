@@ -19,8 +19,11 @@ TypeScript and Supabase.
 - [x] Step 4: Edit and delete
 - [x] Step 5: Save data in Supabase
 - [ ] Step 6: Photo upload
-- [ ] Step 7: Search and filter
-- [ ] Step 8: Mobile-friendly and PWA
+- [ ] Step 7: Measurement annotations on photos
+- [ ] Step 8: Search and filter
+- [ ] Step 9: Deploy to Vercel
+- [ ] Step 10: Mobile-friendly and PWA
+
 
 ## Planned features
 

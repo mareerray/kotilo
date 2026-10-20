@@ -3,6 +3,7 @@ import { getItems, addItem, updateItem, deleteItem } from './lib/itemsApi';
 import type { NewItem } from './lib/itemsApi';
 import type { Item } from './types/item';
 import kotiloIcon from './assets/kotilo-icon.png';
+import { supabase } from './lib/supabase';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
@@ -16,16 +17,33 @@ function App() {
   // Load items once, when the page opens.
   useEffect(() => {
     getItems()
-    .then(setItems)
-    .catch((e) => setError(e.message))
-    .finally(() => setLoading(false));
+      .then(setItems)
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
   }, []);
 
+  // Upload the photo to Supabase Storage and return the public URL.
+  async function uploadPhoto(file: File): Promise<string> {
+    const ext = file.name.split('.').pop() ?? 'jpg';
+    const path = `${crypto.randomUUID()}.${ext}`;
+
+    const { error } = await supabase.storage
+      .from('item-photos')
+      .upload(path, file);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return path;
+  }
+
+
   // Save first, then update the screen with the row from the database.
-  async function handleAddItem(newItem: NewItem) {
+  async function handleAddItem(newItem: NewItem, photoFile: File | null) {
     try {
-      const savedItem = await addItem(newItem);
-        setItems(prev => [savedItem, ...prev]);
+      const photo_path = photoFile ? await uploadPhoto(photoFile) : null;
+      const savedItem = await addItem({ ...newItem, photo_path });
+      setItems(prev => [savedItem, ...prev]);
     } catch (e) {
       setError((e as Error).message);
     }
@@ -40,10 +58,25 @@ function App() {
     }
   }
 
-  async function handleUpdateItem(id: number, updatedItem: Partial<NewItem>) {
+  async function handleUpdateItem(
+    id: number,
+    changes: Partial<NewItem>,
+    newPhoto: File | null
+  ) {
     try {
-      const savedItem = await updateItem(id, updatedItem);
-      setItems(prev => prev.map(item => (item.id === id ? savedItem : item)));
+      const oldPath = items.find((i) => i.id === id)?.photo_path ?? null;
+      const finalChanges = { ...changes };
+
+      if (newPhoto) {
+        finalChanges.photo_path = await uploadPhoto(newPhoto);
+      }
+
+      const savedItem = await updateItem(id, finalChanges);
+      setItems((prev) => prev.map((item) => (item.id === id ? savedItem : item)));
+
+      if (newPhoto && oldPath) {
+        await supabase.storage.from('item-photos').remove([oldPath]);
+      }
     } catch (e) {
       setError((e as Error).message);
     }
@@ -64,11 +97,11 @@ function App() {
           key={item.id}
           item={item}
           onDelete={handleDeleteItem}
-          onUpdate={(updatedItem) => {
+          onUpdate={(updatedItem, newPhoto) => {
             const { id, ...changes } = updatedItem;
-            handleUpdateItem(id, changes);
+            handleUpdateItem(id, changes, newPhoto);
           }}
-        />  
+        />
       ))}
 
     </div>

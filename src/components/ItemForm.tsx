@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { NewItem } from "../lib/itemsApi";
 
 type ItemFormProps = {
-    onAdd: (item: NewItem) => void;
+    onAdd: (item: NewItem, photoFile: File | null) => void;
 };
 
 function ItemForm({ onAdd }: ItemFormProps) {
@@ -12,6 +12,7 @@ function ItemForm({ onAdd }: ItemFormProps) {
     const [width, setWidth] = useState<number | null>(null);
     const [height, setHeight] = useState<number | null>(null);
     const [depth, setDepth] = useState<number | null>(null);
+    const [photoFile, setPhotoFile] = useState<File | null>(null);
     const [condition, setCondition] = useState("Good");
     const [error, setError] = useState("");
 
@@ -21,6 +22,10 @@ function ItemForm({ onAdd }: ItemFormProps) {
         if (!name.trim()) return;
         if ((width ?? 0) < 0 || (height ?? 0) < 0 || (depth ?? 0) < 0) {
             setError("Measurements cannot be negative.");
+            return;
+        }
+        if (!photoFile) {
+            setError("A photo is required.");
             return;
         }
 
@@ -33,7 +38,7 @@ function ItemForm({ onAdd }: ItemFormProps) {
             depth_cm: depth,
             photo_path: null,
             condition: condition,
-        });
+        }, photoFile);
 
         setName("");
         setCategory("");
@@ -42,6 +47,7 @@ function ItemForm({ onAdd }: ItemFormProps) {
         setHeight(null);
         setDepth(null);
         setCondition("Good");
+        setPhotoFile(null);
     }
 
     return (
@@ -88,6 +94,11 @@ function ItemForm({ onAdd }: ItemFormProps) {
                 placeholder="Depth (cm)"
                 value={depth ?? ""}
                 onChange={(e) => setDepth(e.target.value ? parseFloat(e.target.value) : null)}
+            />
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setPhotoFile(e.target.files ? e.target.files[0] : null)}
             />
             <select value={condition} onChange={(e) => setCondition(e.target.value)}>
                 <option value="New">New</option>
