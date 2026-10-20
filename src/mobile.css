@@ -1,0 +1,211 @@
+@media (max-width: 600px) {
+    /* Page spacing */
+    .app-shell {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .app-title {
+        width: 100%;
+        justify-content: center;
+        font-size: 1.75rem;
+        margin: 12px 0 20px;
+    }
+
+    /* Four stats become two rows */
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .stat {
+        min-width: 0;
+        padding: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .stat__icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .stat__text {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .stat__label {
+        font-size: 0.8rem;
+    }
+
+    .stat__value {
+        font-size: 1.25rem;
+        overflow-wrap: anywhere;
+    }
+
+    /* Add-item form */
+    .add-panel {
+        padding: 12px;
+    }
+
+    .add-panel summary {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+    }
+
+    .add-form {
+        width: 100%;
+        margin: 12px 0 0;
+        padding: 0;
+        box-shadow: none;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .add-form__row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .add-form__row > select {
+        flex: 1 1 140px;
+        width: auto;
+    }
+
+    .add-form .checkbox {
+        width: auto;
+        min-height: 48px;
+    }
+
+    /* Keep checkboxes small, even if older rules set inputs to 100% */
+    .add-form input[type="checkbox"],
+    .item-card input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        flex: none;
+        padding: 0;
+    }
+
+    .field.checkbox {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    /* Search on its own row; dropdowns below */
+    .item-filters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        max-width: none;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .search-box {
+        grid-column: 1 / -1;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .item-filters .search-box input {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .item-filters > select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .item-filters > button {
+        grid-column: 1 / -1;
+    }
+
+    /* One card per row */
+    .items-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .items-grid > .item-card {
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+
+    .item-card__photo-area {
+        padding: 8px;
+    }
+
+    .item-card__title,
+    .item-card__details p {
+        overflow-wrap: anywhere;
+    }
+
+    /* Edit fields */
+    .field-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Annotation inputs stay outside the photo frame */
+    .annotation-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .annotation-form input {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Readable controls */
+    .app-shell input,
+    .app-shell select,
+    .app-shell textarea {
+        font-size: 16px;
+    }
+
+    /* Comfortable touch targets, without enlarging measurement labels */
+    .btn,
+    .item-card__actions button,
+    .annotation-form button,
+    .item-card--edit .item-card__delete,
+    .app-shell select,
+    .app-shell input:not([type="checkbox"]) {
+        min-height: 48px;
+    }
+
+    .item-card__actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .item-card__actions button {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Extra-narrow screens */
+@media (max-width: 360px) {
+    .stats,
+    .item-filters,
+    .field-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

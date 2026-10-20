@@ -208,7 +208,7 @@ button:disabled {
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
-    margin: 16px auto;
+    margin: 10px auto;
     width: min(840px, 92%);
 }
 
