@@ -149,6 +149,25 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
                 </div>
 
                 <label className="field">
+                    Price (€)
+                    <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={draftItem.price ?? ''}
+                        onChange={(e) => setDraftItem({ ...draftItem, price: numberValue(e.target.value) })}
+                    />
+                </label>
+
+                <label className="field">
+                    Description
+                    <textarea
+                        value={draftItem.description}
+                        onChange={(e) => setDraftItem({ ...draftItem, description: e.target.value })}
+                    />
+                </label>
+
+                <label className="field">
                     Condition
                     <select
                         value={draftItem.condition}
@@ -176,6 +195,11 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
             <header className="item-card__header">
                 <h2>{item.name}</h2>
                 <span className="item-card__condition">{item.condition}</span>
+                {item.price != null && (
+                    <span className="item-card__price">
+                        {new Intl.NumberFormat('fi-FI', { style: 'currency', currency: 'EUR' }).format(item.price)}
+                    </span>
+                )}
             </header>
 
             {photoUrl ? (
@@ -209,7 +233,8 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
             </dl>
 
             <div className="item-card__details">
-                <p>Category: {item.category || 'Not specified'}</p>
+                {item.description && <p>{item.description}</p>} |
+                <p>Category: {item.category || 'Not specified'}</p> |
                 <p>Color: {item.color || 'Not specified'}</p>
             </div>
 

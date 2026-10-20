@@ -3,6 +3,7 @@ import type { Annotation } from "./annotation";
 export type Item = {
     id: number;
     name: string;
+    description: string;
     category: string;
     color: string;
     width_cm: number | null;
@@ -10,5 +11,6 @@ export type Item = {
     depth_cm: number | null;
     photo_path: string | null;
     condition: string;
+    price: number | null;
     annotations: Annotation[];
 };

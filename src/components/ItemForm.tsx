@@ -3,12 +3,14 @@ import type { NewItem } from "../lib/itemsApi";
 
 type ItemFormProps = {
     onAdd: (
-        item: NewItem, 
+        item: NewItem,
         photoFile: File | null) => Promise<void>;
 };
 
 function ItemForm({ onAdd }: ItemFormProps) {
     const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState<number | null>(null);
     const [category, setCategory] = useState("");
     const [color, setColor] = useState("");
     const [width, setWidth] = useState<number | null>(null);
@@ -27,6 +29,10 @@ function ItemForm({ onAdd }: ItemFormProps) {
             setError("Measurements cannot be negative.");
             return;
         }
+        if ((price ?? 0) < 0) {
+            setError("Price cannot be negative.");
+            return;
+        }
         if (!photoFile) {
             setError("A photo is required.");
             return;
@@ -35,6 +41,8 @@ function ItemForm({ onAdd }: ItemFormProps) {
 
         await onAdd({
             name: name.trim(),
+            description: description.trim(),
+            price: price,
             category: category.trim(),
             color: color.trim(),
             width_cm: width,
@@ -47,6 +55,8 @@ function ItemForm({ onAdd }: ItemFormProps) {
 
         setIsSubmitting(false);
         setName("");
+        setDescription("");
+        setPrice(null);
         setCategory("");
         setColor("");
         setWidth(null);
@@ -101,6 +111,20 @@ function ItemForm({ onAdd }: ItemFormProps) {
                 value={depth ?? ""}
                 onChange={(e) => setDepth(e.target.value ? parseFloat(e.target.value) : null)}
             />
+            <input
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Price (€)"
+                value={price ?? ""}
+                onChange={(e) => setPrice(e.target.value ? parseFloat(e.target.value) : null)}
+            />
+            <textarea
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+            />
+        
             <input
                 type="file"
                 accept="image/*"
