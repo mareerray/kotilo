@@ -3,8 +3,10 @@ import { getItems, addItem, updateItem, deleteItem } from './lib/itemsApi';
 import { resizeImage } from './lib/resizeImage';
 import type { NewItem } from './lib/itemsApi';
 import type { Item } from './types/item';
+import type { Annotation } from './types/annotation';
 import kotiloIcon from './assets/kotilo-icon.png';
 import { supabase } from './lib/supabase';
+import { updateAnnotations } from './lib/itemsApi';
 
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
@@ -23,6 +25,7 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Upload photo
   // Upload the photo to Supabase Storage and return the public URL.
   async function uploadPhoto(file: File): Promise<string> {
     const resized = await resizeImage(file);
@@ -39,7 +42,7 @@ function App() {
     return path;
   }
 
-
+  // Add item
   // Save first, then update the screen with the row from the database.
   async function handleAddItem(newItem: NewItem, photoFile: File | null) {
     try {
@@ -51,15 +54,23 @@ function App() {
     }
   }
 
+  // Delete item
+  // Delete first, then update the screen.
   async function handleDeleteItem(delId: number) {
     try {
+      const path = items.find((i) => i.id === delId)?.photo_path ?? null;
       await deleteItem(delId);
       setItems(prev => prev.filter(item => item.id !== delId));
+      if (path) {
+        await supabase.storage.from('item-photos').remove([path]);
+      }
     } catch (e) {
       setError((e as Error).message);
     }
   }
 
+  // Update item
+  // Save first, then update the screen with the row from the database.
   async function handleUpdateItem(
     id: number,
     changes: Partial<NewItem>,
@@ -73,7 +84,7 @@ function App() {
         finalChanges.photo_path = await uploadPhoto(newPhoto);
       }
 
-      
+
 
       const savedItem = await updateItem(id, finalChanges);
       setItems((prev) => prev.map((item) => (item.id === id ? savedItem : item)));
@@ -86,6 +97,23 @@ function App() {
     }
   }
 
+  // Update annotations
+  async function handleAnnotationsChange(id: number, annotations: Annotation[]) {
+    const previous = items.find((i) => i.id === id)?.annotations ?? [];
+
+    // 1. update the screen right away
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, annotations } : i)));
+
+    // 2. save; if it fails, put the old lines back
+    try {
+      await updateAnnotations(id, annotations);
+    } catch (e) {
+      setItems((prev) => prev.map((i) => (i.id === id ? { ...i, annotations: previous } : i)));
+      setError((e as Error).message);
+    }
+  }
+
+  // Show loading message while items are being fetched from the database.
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -101,6 +129,7 @@ function App() {
           key={item.id}
           item={item}
           onDelete={handleDeleteItem}
+          onAnnotationsChange={handleAnnotationsChange}
           onUpdate={(updatedItem, newPhoto) => {
             const { id, ...changes } = updatedItem;
             return handleUpdateItem(id, changes, newPhoto);

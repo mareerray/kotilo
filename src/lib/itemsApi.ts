@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
 import type { Item } from '../types/item';
+import type { Annotation } from '../types/annotation';
 
 // A new item has no id yet: the database creates it.
 // Omit<Item, "id"> uses whatever fields your type has.
@@ -46,5 +47,15 @@ export async function deleteItem(id: number): Promise<void> {
     .from('items')
     .delete()
     .eq('id', id); // a filter to delete the row where id equals this id
+    if (error) throw error;
+}
+
+// Update the annotations for a specific item.
+// Save only the annotations of one item.
+export async function updateAnnotations(id: number, annotations: Annotation[]): Promise<void> {
+    const { error } = await supabase
+    .from('items')
+    .update({ annotations })
+    .eq('id', id);
     if (error) throw error;
 }

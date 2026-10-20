@@ -375,3 +375,62 @@ button:disabled {
     flex: 1;
   }
 }
+
+/* ******************************************
+ * Photo annotation styles
+ ********************* */
+
+.annotator {
+    position: relative;
+    width: 100%;
+    cursor: crosshair;
+    container-type: inline-size; /* allows the annotator to know its own width for responsive scaling */
+}
+
+.annotator__lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* taps go through to the photo */
+}
+
+.line {
+    stroke: #e11d48;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke; /* keeps the line thickness even */
+}
+
+.line--draft {
+    stroke: #2563eb;
+    stroke-dasharray: 6 4;
+}
+
+.dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+    background: #e11d48;
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.dot--draft { background: #2563eb; }
+
+.line-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: rgb(255, 255, 255);
+    color: #e11d48;
+    border: 1px solid #e11d48;
+    border-radius: 6px;
+    padding: 0.2em 0.5em;
+    font-size: clamp(8px, 3cqw, 12px);
+    white-space: nowrap;
+    max-width: 40cqw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}

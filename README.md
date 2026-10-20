@@ -18,8 +18,8 @@ TypeScript and Supabase.
 - [x] Step 3: Add item form
 - [x] Step 4: Edit and delete
 - [x] Step 5: Save data in Supabase
-- [ ] Step 6: Photo upload
-- [ ] Step 7: Measurement annotations on photos
+- [x] Step 6: Photo upload
+- [x] Step 7: Measurement annotations on photos
 - [ ] Step 8: Search and filter
 - [ ] Step 9: Deploy to Vercel
 - [ ] Step 10: Mobile-friendly and PWA

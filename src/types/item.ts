@@ -1,3 +1,5 @@
+import type { Annotation } from "./annotation";
+
 export type Item = {
     id: number;
     name: string;
@@ -8,4 +10,5 @@ export type Item = {
     depth_cm: number | null;
     photo_path: string | null;
     condition: string;
+    annotations: Annotation[];
 };

@@ -2,7 +2,9 @@ import { useState } from "react";
 import type { NewItem } from "../lib/itemsApi";
 
 type ItemFormProps = {
-    onAdd: (item: NewItem, photoFile: File | null) => Promise<void>;
+    onAdd: (
+        item: NewItem, 
+        photoFile: File | null) => Promise<void>;
 };
 
 function ItemForm({ onAdd }: ItemFormProps) {
@@ -17,7 +19,7 @@ function ItemForm({ onAdd }: ItemFormProps) {
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    async function handleSubmit(event: React.FormEvent) {
+    async function handleSubmit(event: React.SubmitEvent) {
         event.preventDefault();
         setError("");
         if (!name.trim()) return;
@@ -39,6 +41,7 @@ function ItemForm({ onAdd }: ItemFormProps) {
             height_cm: height,
             depth_cm: depth,
             photo_path: null,
+            annotations: [],
             condition: condition,
         }, photoFile);
 

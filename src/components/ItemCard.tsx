@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import type { Item } from '../types/item';
+import type { Annotation } from '../types/annotation';
 import { supabase } from '../lib/supabase';
-import PhotoLoadingStatus from '../lib/photoLoadingStatus';
+import PhotoLoadingStatus from './PhotoLoadingStatus';
+import PhotoAnnotator from './PhotoAnnotator';
 
 type ItemCardProps = {
     item: Item;
     onDelete: (id: number) => void;
     onUpdate: (updatedItem: Item, newPhoto: File | null) => void;
+    onAnnotationsChange: (itemId: number, annotations: Annotation[]) => void;
 };
 
-function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
+function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [draftItem, setDraftItem] = useState<Item>(item);
@@ -44,6 +47,7 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
     }
 
     if (isEditing) {
+        /* ---------------------------Edit Mode----------------------------- */
         return (
             <article className="item-card item-card--edit">
                 <h2>Edit item</h2>
@@ -58,7 +62,7 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
                         <button
                             type="button"
                             className="item-card__delete"
-                            onClick={() => setDraftItem({ ...draftItem, photo_path: null })}
+                            onClick={() => setDraftItem({ ...draftItem, photo_path: null, annotations: [] })}
                         >
                             Remove photo
                         </button>
@@ -70,7 +74,11 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
                     <input
                         type="file"
                         accept="image/*"
-                        onChange={(e) => setNewPhoto(e.target.files?.[0] ?? null)}
+                        onChange={(e) => {
+                            const file = e.target.files?.[0] ?? null;
+                            setNewPhoto(file);
+                            if (file) setDraftItem({ ...draftItem, annotations: [] });
+                        }}
                     />
                 </label>
                 {newPhoto && <p className="field-note">New photo: {newPhoto.name}</p>}
@@ -163,6 +171,7 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
     }
 
     return (
+        /* ---------------------------View Mode----------------------------- */
         <article className="item-card item-card--view">
             <header className="item-card__header">
                 <h2>{item.name}</h2>
@@ -172,7 +181,12 @@ function ItemCard({ item, onDelete, onUpdate }: ItemCardProps) {
             {photoUrl ? (
                 <div className="item-card__photo-area">
                     <div className="item-card__photo-stage">
-                        <PhotoLoadingStatus key={photoUrl} src={photoUrl} alt={item.name} />                        {/* Measurement annotations will go here in Step 7. */}
+                        <PhotoAnnotator
+                            annotations={item.annotations}
+                            onChange={(next) => onAnnotationsChange(item.id, next)}
+                        >
+                            <PhotoLoadingStatus key={photoUrl} src={photoUrl} alt={item.name} />
+                        </PhotoAnnotator>
                     </div>
                 </div>
             ) : (
