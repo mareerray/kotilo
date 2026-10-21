@@ -472,8 +472,9 @@
     }
 
 
-    .home-room__name {
+    .home-room__name, .house-garden {
         font-size: 0.875rem;
+        font-weight: 700;
     }
 
     .home-room__symbol {

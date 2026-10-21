@@ -24,6 +24,8 @@ TypeScript and Supabase.
 - [x] Step 9: Deploy to Vercel
 - [x] Step 10: Mobile-friendly and PWA
 - [x] Step 11: Pagination
+- [x] Step 12: Home map & room navigation
+- [ ] Step 13: Furniture placement inside each room
 
 
 ## Planned features
