@@ -42,9 +42,9 @@ function HomePage() {
                     <span className="cloud cloud-4" />
                     <span className="cloud cloud-5" />
 
-                    <span className="bird bird-1">🕊️</span>
-                    <span className="bird bird-2">🕊️</span>
-                    <span className="bird bird-3">🕊️</span>
+                    <span className="bird bird-1 bird-icon">🕊️</span>
+                    <span className="bird bird-2 bird-icon">🕊️</span>
+                    <span className="bird bird-3 bird-icon">🕊️</span>
                 </div>
 
                 {/* Decorative roof */}
