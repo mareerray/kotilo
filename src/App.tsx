@@ -169,7 +169,7 @@ function App() {
 
                 <StatsBar items={items} />
 
-                <ItemForm onAdd={handleAddItem} />
+                <ItemForm open={true} onClose={() => {}} onAdd={handleAddItem} />
 
                 <ItemFilters
                   search={search}
