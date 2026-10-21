@@ -15,6 +15,7 @@ import AppFooter from './components/AppFooter';
 import ItemCard from './components/ItemCard';
 import ItemForm from './components/ItemForm';
 import ItemFilters from './components/ItemFilters';
+import Pagination from './components/Pagination';
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [error, setError] = useState("");
   const [toastMessage, setToastMessage] = useState("");
+
+  const PAGE_SIZE = 3;
+  const [page, setPage] = useState(1);
 
   // Load items once, when the page opens.
   useEffect(() => {
@@ -59,7 +63,10 @@ function App() {
       const photo_path = photoFile ? await uploadPhoto(photoFile) : null;
       const savedItem = await addItem({ ...newItem, photo_path });
       setItems(prev => [savedItem, ...prev]);
-      setSearch(''); setCategoryFilter(''); setConditionFilter('');
+      setSearch('');
+      setCategoryFilter('');
+      setConditionFilter('');
+      setPage(1);
       showToast('Item added ✓');
     } catch (e) {
       setError((e as Error).message);
@@ -135,6 +142,13 @@ function App() {
     return matchesSearch && matchesCategory && matchesCondition;
   });
 
+  const totalPages = Math.max(1, Math.ceil(visibleItems.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pagedItems = visibleItems.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
   // Show loading message while items are being fetched from the database.
   if (loading) return <p>Loading...</p>;
 
@@ -185,17 +199,17 @@ function App() {
                   category={categoryFilter}
                   condition={conditionFilter}
                   categories={categories}
-                  onSearchChange={setSearch}
-                  onCategoryChange={setCategoryFilter}
-                  onConditionChange={setConditionFilter}
-                  onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
+                  onSearchChange={(v) => { setSearch(v); setPage(1); }}
+                  onCategoryChange={(v) => { setCategoryFilter(v); setPage(1); }}
+                  onConditionChange={(v) => { setConditionFilter(v); setPage(1); }}
+                  onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); setPage(1); }}
                 />
 
                 <p className="results-note">Showing {visibleItems.length} of {items.length} items</p>
                 {visibleItems.length === 0 && <p className="results-note">No items match your filters.</p>}
 
                 <div className="items-grid">
-                  {visibleItems.map((item) => (
+                  {pagedItems.map((item) => (
                     <ItemCard
                       key={item.id}
                       item={item}
@@ -209,6 +223,14 @@ function App() {
                   ))}
                 </div>
                 {toastMessage && <div className="toast" role="status">{toastMessage}</div>}
+                <Pagination
+                  page={currentPage}
+                  totalPages={totalPages}
+                  onChange={(p) => {
+                    setPage(p);
+                    document.getElementById('inventory')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                />
               </section>
             </>
           } />
