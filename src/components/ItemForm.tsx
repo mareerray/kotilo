@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { NewItem } from "../lib/itemsApi";
+import { rooms } from "../data/rooms";
 
 type ItemFormProps = {
     open: boolean;
@@ -96,7 +97,22 @@ function ItemForm({ open, onAdd, onClose }: ItemFormProps) {
                     {error && <p role="alert" className="form-error">{error}</p>}
 
                     <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                    <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                    <label htmlFor="item-room">
+                        Room
+                        <select
+                            id="item-room"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value="">Unassigned</option>
+
+                            {rooms.map((room) => (
+                                <option key={room.id} value={room.name}>
+                                    {room.name}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
                     <input type="text" placeholder="Color" value={color} onChange={(e) => setColor(e.target.value)} />
                     <input
                         type="number" min="0" step="0.01" placeholder="Price (€)"
