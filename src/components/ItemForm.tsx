@@ -2,12 +2,14 @@ import { useState } from "react";
 import type { NewItem } from "../lib/itemsApi";
 
 type ItemFormProps = {
+    open: boolean;
+    onClose: () => void;
     onAdd: (
         item: NewItem,
         photoFile: File | null) => Promise<void>;
 };
 
-function ItemForm({ onAdd }: ItemFormProps) {
+function ItemForm({ open, onAdd, onClose }: ItemFormProps) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState<number | null>(null);
@@ -74,64 +76,72 @@ function ItemForm({ onAdd }: ItemFormProps) {
         setPhotoFile(null);
     }
 
+    if (!open) return null;
+
     return (
-        <details className="add-panel">
-            <summary>+ Add item</summary>
-            <form className="add-form" onSubmit={handleSubmit}>
-                {error && <p role="alert" className="form-error">{error}</p>}
-
-                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
-                <input type="text" placeholder="Color" value={color} onChange={(e) => setColor(e.target.value)} />
-                <input
-                    type="number" min="0" step="0.01" placeholder="Price (€)"
-                    value={price ?? ""} onChange={(e) => setPrice(numberValue(e.target.value))}
-                />
-                <input
-                    type="number" min="0" step="any" placeholder="Width (cm)"
-                    value={width ?? ""} onChange={(e) => setWidth(numberValue(e.target.value))}
-                />
-                <input
-                    type="number" min="0" step="any" placeholder="Height (cm)"
-                    value={height ?? ""} onChange={(e) => setHeight(numberValue(e.target.value))}
-                />
-                <input
-                    type="number" min="0" step="any" placeholder="Depth (cm)"
-                    value={depth ?? ""} onChange={(e) => setDepth(numberValue(e.target.value))}
-                />
-
-                <div className="add-form__wide add-form__row">
-                    <select value={condition} onChange={(e) => setCondition(e.target.value)}>
-                        <option value="New">New</option>
-                        <option value="Good">Good</option>
-                        <option value="Fair">Fair</option>
-                        <option value="Poor">Poor</option>
-                    </select>
-
-                    <label className="checkbox">
-                        <input type="checkbox" checked={forSale} onChange={(e) => setForSale(e.target.checked)} />
-                        Planning to sell
-                    </label>
+        <div className="modal-backdrop" onClick={onClose}>
+            <div className="modal" role="dialog" aria-modal="true"
+                aria-labelledby="add-title" onClick={(e) => e.stopPropagation()}>
+                <div className="modal__header">
+                    <h2 id="add-title">Add item</h2>
+                    <button type="button" className="btn" onClick={onClose} aria-label="Close">✕</button>
                 </div>
+                <form className="add-form" onSubmit={handleSubmit}>
+                    {error && <p role="alert" className="form-error">{error}</p>}
 
-                <textarea
-                    className="add-form__wide"
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <input
-                    className="add-form__wide"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setPhotoFile(e.target.files ? e.target.files[0] : null)}
-                />
+                    <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                    <input type="text" placeholder="Color" value={color} onChange={(e) => setColor(e.target.value)} />
+                    <input
+                        type="number" min="0" step="0.01" placeholder="Price (€)"
+                        value={price ?? ""} onChange={(e) => setPrice(numberValue(e.target.value))}
+                    />
+                    <input
+                        type="number" min="0" step="any" placeholder="Width (cm)"
+                        value={width ?? ""} onChange={(e) => setWidth(numberValue(e.target.value))}
+                    />
+                    <input
+                        type="number" min="0" step="any" placeholder="Height (cm)"
+                        value={height ?? ""} onChange={(e) => setHeight(numberValue(e.target.value))}
+                    />
+                    <input
+                        type="number" min="0" step="any" placeholder="Depth (cm)"
+                        value={depth ?? ""} onChange={(e) => setDepth(numberValue(e.target.value))}
+                    />
 
-                <button className="btn btn--primary add-form__wide" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Adding..." : "Add Item"}
-                </button>
-            </form>
-        </details>
+                    <div className="add-form__wide add-form__row">
+                        <select value={condition} onChange={(e) => setCondition(e.target.value)}>
+                            <option value="New">New</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+
+                        <label className="checkbox">
+                            <input type="checkbox" checked={forSale} onChange={(e) => setForSale(e.target.checked)} />
+                            Planning to sell
+                        </label>
+                    </div>
+
+                    <textarea
+                        className="add-form__wide"
+                        placeholder="Description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <input
+                        className="add-form__wide"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setPhotoFile(e.target.files ? e.target.files[0] : null)}
+                    />
+
+                    <button className="btn btn--primary add-form__wide" type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Adding..." : "Add Item"}
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 }
 

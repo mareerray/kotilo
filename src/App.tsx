@@ -23,6 +23,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [conditionFilter, setConditionFilter] = useState('');
+  const [showAddForm, setShowAddForm] = useState(false);
   const [error, setError] = useState("");
 
   // Load items once, when the page opens.
@@ -144,60 +145,64 @@ function App() {
 
       <main id="main-content">
         <Routes>
-    <Route path="/" element={
-        <>
-        <section className="dashboard-intro">
-          <p className="section-eyebrow">Your personal storage dashboard</p>
-          <h1>A little order. A little peace of mind.</h1>
-          <p>
-            Know what you have, keep measurements close,
-            and make room for what matters.
-          </p>
-        </section>
+          <Route path="/" element={
+            <>
+              <button className="fab" onClick={() => setShowAddForm(true)} aria-label="Add item">+</button>
 
-        <section id="inventory" aria-labelledby="inventory-title">
-          <h2 className="inventory-heading" id="inventory-title">
-            My inventory
-          </h2>
+              <ItemForm open={showAddForm} onClose={() => setShowAddForm(false)} onAdd={handleAddItem} />
 
-          {error && <p className="form-error">Error: {error}</p>}
+              <section className="dashboard-intro">
+                <p className="section-eyebrow">Your personal storage dashboard</p>
+                <h1>A little order. A little peace of mind.</h1>
+                <p>
+                  Know what you have, keep measurements close,
+                  and make room for what matters.
+                </p>
+              </section>
 
-          <StatsBar items={items} />
+              <section id="inventory" aria-labelledby="inventory-title">
+                <h2 className="inventory-heading" id="inventory-title">
+                  My inventory
+                </h2>
 
-          <ItemForm onAdd={handleAddItem} />
+                {error && <p className="form-error">Error: {error}</p>}
 
-          <ItemFilters
-            search={search}
-            category={categoryFilter}
-            condition={conditionFilter}
-            categories={categories}
-            onSearchChange={setSearch}
-            onCategoryChange={setCategoryFilter}
-            onConditionChange={setConditionFilter}
-            onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
-          />
+                <StatsBar items={items} />
 
-          <p className="results-note">Showing {visibleItems.length} of {items.length} items</p>
-          {visibleItems.length === 0 && <p className="results-note">No items match your filters.</p>}
+                <ItemForm onAdd={handleAddItem} />
 
-          <div className="items-grid">
-            {visibleItems.map((item) => (
-              <ItemCard
-                key={item.id}
-                item={item}
-                onDelete={handleDeleteItem}
-                onAnnotationsChange={handleAnnotationsChange}
-                onUpdate={(updatedItem, newPhoto) => {
-                  const { id, ...changes } = updatedItem;
-                  return handleUpdateItem(id, changes, newPhoto);
-                }}
-              />
-            ))}
-          </div>
-        </section>
-        </>
-        } />
-        <Route path="/about" element={<AboutKotilo />} />
+                <ItemFilters
+                  search={search}
+                  category={categoryFilter}
+                  condition={conditionFilter}
+                  categories={categories}
+                  onSearchChange={setSearch}
+                  onCategoryChange={setCategoryFilter}
+                  onConditionChange={setConditionFilter}
+                  onClear={() => { setSearch(''); setCategoryFilter(''); setConditionFilter(''); }}
+                />
+
+                <p className="results-note">Showing {visibleItems.length} of {items.length} items</p>
+                {visibleItems.length === 0 && <p className="results-note">No items match your filters.</p>}
+
+                <div className="items-grid">
+                  {visibleItems.map((item) => (
+                    <ItemCard
+                      key={item.id}
+                      item={item}
+                      onDelete={handleDeleteItem}
+                      onAnnotationsChange={handleAnnotationsChange}
+                      onUpdate={(updatedItem, newPhoto) => {
+                        const { id, ...changes } = updatedItem;
+                        return handleUpdateItem(id, changes, newPhoto);
+                      }}
+                    />
+                  ))}
+                </div>
+              </section>
+            </>
+          } />
+          <Route path="/about" element={<AboutKotilo />} />
         </Routes>
       </main>
 

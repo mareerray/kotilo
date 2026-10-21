@@ -1,6 +1,6 @@
 # Kotilo 🐌
 
-A home inventory app to record everything you own: furniture, photos,
+<div><img src="src/assets/kotilo-logo-nobg.png" width="280" height="280"></div>A home inventory app to record everything you own: furniture, photos,
 sizes, colors and condition.
 
 Like a snail carries its home on its back, Kotilo carries a list of
@@ -21,7 +21,7 @@ TypeScript and Supabase.
 - [x] Step 6: Photo upload
 - [x] Step 7: Measurement annotations on photos
 - [x] Step 8: Search and filter
-- [ ] Step 9: Deploy to Vercel
+- [x] Step 9: Deploy to Vercel
 - [ ] Step 10: Mobile-friendly and PWA
 
 
