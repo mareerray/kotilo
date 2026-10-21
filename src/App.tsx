@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getItems, addItem, updateItem, deleteItem } from './lib/itemsApi';
 import { resizeImage } from './lib/resizeImage';
@@ -142,6 +143,9 @@ function App() {
       <AppHeader />
 
       <main id="main-content">
+        <Routes>
+    <Route path="/" element={
+        <>
         <section className="dashboard-intro">
           <p className="section-eyebrow">Your personal storage dashboard</p>
           <h1>A little order. A little peace of mind.</h1>
@@ -191,7 +195,10 @@ function App() {
             ))}
           </div>
         </section>
-        <AboutKotilo />
+        </>
+        } />
+        <Route path="/about" element={<AboutKotilo />} />
+        </Routes>
       </main>
 
       <AppFooter />
