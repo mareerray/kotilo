@@ -4,7 +4,7 @@ import './home.css';
 import {
     Sofa,
     BedDouble,
-    BookOpen,
+    NotebookPen,
     DoorOpen,
     CookingPot,
     Bath,
@@ -19,13 +19,12 @@ import type { LucideIcon } from 'lucide-react';
 const roomIcons: Record<string, LucideIcon> = {
     'living-room': Sofa,
     bedroom: BedDouble,
-    office: BookOpen,
+    office: NotebookPen,
     hallway: DoorOpen,
     kitchen: CookingPot,
     bathroom: Bath,
     outdoor: Sprout,
 };
-
 function HomePage() {
     return (
         <section className="home-page" aria-labelledby="home-title">
