@@ -17,6 +17,9 @@ import ItemForm from './components/ItemForm';
 import ItemFilters from './components/ItemFilters';
 import Pagination from './components/Pagination';
 
+import HomePage from './pages/HomePage';
+import RoomPage from './pages/RoomPage';
+
 
 function App() {
   const [items, setItems] = useState<Item[]>([]);
@@ -168,7 +171,10 @@ function App() {
 
       <main id="main-content">
         <Routes>
-          <Route path="/" element={
+          <Route path="/" element={<HomePage />} />
+
+          <Route path="/rooms/:roomId" element={<RoomPage />} />
+          <Route path="/inventory" element={
             <>
               <button className="fab" onClick={() => setShowAddForm(true)} aria-label="Add item">+</button>
 
