@@ -20,13 +20,15 @@
     --accent-strong: #be185d;
     --danger: #dc2626;
     --danger-soft: #fef2f2;
+
+    --font-main: "Nunito", system-ui, sans-serif;
 }
 
 body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: system-ui, sans-serif;
+    font-family: var(--font-main);
 }
 
 .app-shell {
