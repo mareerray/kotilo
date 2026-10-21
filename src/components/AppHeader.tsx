@@ -1,4 +1,4 @@
-import kotiloIcon from '../assets/kotilo-icon.png';
+import kotiloIcon from '../assets/kotilo-logo-nobg.png';
 
 function AppHeader() {
     return (
