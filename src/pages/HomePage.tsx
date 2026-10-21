@@ -1,5 +1,16 @@
 import { Link } from 'react-router-dom';
+import { rooms } from '../data/rooms';
 import './home.css';
+
+const roomSymbols: Record<string, string> = {
+    'living-room': '🛋️',
+    bedroom: '🛏️',
+    office: '📚',
+    hallway: '🚪',
+    kitchen: '🫖',
+    bathroom: '🛁',
+    outdoor: '🌿',
+};
 
 function HomePage() {
     return (
@@ -10,36 +21,63 @@ function HomePage() {
                 <p>Choose a room and find the things you keep there.</p>
             </header>
 
-            <div className="home-map" aria-label="Choose a room">
-                <Link
-                    to="/rooms/living-area"
-                    className="home-room home-room--living"
-                >
-                    <span className="home-room__symbol" aria-hidden="true">🛋️</span>
-                    <span className="home-room__name">Living area</span>
-                    <span className="home-room__hint">A place to unwind</span>
-                </Link>
+            <div className="home-house">
+                {/* Decorative roof */}
+                <div className="house-roof-area" aria-hidden="true">
+                    <div className="house-chimney">
+                        <span className="chimney-smoke chimney-smoke--one" />
+                        <span className="chimney-smoke chimney-smoke--two" />
+                        <span className="chimney-smoke chimney-smoke--three" />
+                    </div>
 
-                <Link
-                    to="/rooms/kitchen"
-                    className="home-room home-room--kitchen"
-                >
-                    <span className="home-room__symbol" aria-hidden="true">🫖</span>
-                    <span className="home-room__name">Kitchen</span>
-                    <span className="home-room__hint">Something warm</span>
-                </Link>
+                    <div className="house-roof">
+                        <span className="house-roof__window" />
+                    </div>
+                </div>
 
-                <Link
-                    to="/rooms/bedroom"
-                    className="home-room home-room--bedroom"
-                >
-                    <span className="home-room__symbol" aria-hidden="true">🛏️</span>
-                    <span className="home-room__name">Bedroom</span>
-                    <span className="home-room__hint">Rest and recharge</span>
-                </Link>
-            </div>
+                {/* Indoor rooms */}
+                <div className="home-map" aria-label="Choose a room">
+                    {rooms
+                        .filter((room) => room.id !== 'outdoor')
+                        .map((room) => (
+                            <Link
+                                key={room.id}
+                                to={`/rooms/${room.id}`}
+                                className={`home-room home-room--${room.id}`}
+                            >
+                                <span className="room-window" aria-hidden="true" />
 
-            <Link className="home-inventory-link" to="/inventory">
+                                <span className="home-room__symbol" aria-hidden="true">
+                                    {roomSymbols[room.id]}
+                                </span>
+
+                                <span className="home-room__name">
+                                    {room.name}
+                                </span>
+                            </Link>
+                        ))}
+                </div>
+
+                {/* Decorative entrance */}
+                <div className="house-entrance" aria-hidden="true">
+                    <span className="house-door" />
+                </div>
+
+                {/* Outdoor is outside the house */}
+                {rooms
+                    .filter((room) => room.id === 'outdoor')
+                    .map((room) => (
+                        <Link
+                            key={room.id}
+                            to={`/rooms/${room.id}`}
+                            className="house-garden"
+                        >
+                            <span aria-hidden="true">🌿</span>
+                            <span>{room.name}</span>
+                            <span aria-hidden="true">🌼</span>
+                        </Link>
+                    ))}
+            </div>            <Link className="home-inventory-link" to="/inventory">
                 View all belongings →
             </Link>
         </section>

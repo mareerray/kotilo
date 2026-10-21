@@ -1,20 +1,16 @@
 import { Link, useParams } from 'react-router-dom';
+import { rooms } from '../data/rooms';
 import './home.css';
-
-const roomNames: Record<string, string> = {
-    'living-area': 'Living area',
-    kitchen: 'Kitchen',
-    bedroom: 'Bedroom',
-};
 
 function RoomPage() {
     const { roomId } = useParams();
-    const roomName = roomId ? roomNames[roomId] : undefined;
+    const room = rooms.find((room) => room.id === roomId);
 
-    if (!roomName) {
+    if (!room) {
         return (
             <section className="home-page">
                 <h1>Room not found</h1>
+
                 <Link className="home-inventory-link" to="/">
                     ← Back to my home
                 </Link>
@@ -29,12 +25,12 @@ function RoomPage() {
             </Link>
 
             <header className="home-intro">
-                <h1>{roomName}</h1>
-                <p>This room is ready for your belongings.</p>
+                <h1>{room.name}</h1>
+                <p>A little place for the things you keep.</p>
             </header>
 
             <p>
-                Next, we’ll connect items from your inventory to this room.
+                Your belongings in this space will appear here soon.
             </p>
 
             <Link className="home-inventory-link" to="/inventory">
