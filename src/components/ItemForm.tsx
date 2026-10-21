@@ -45,35 +45,41 @@ function ItemForm({ open, onAdd, onClose }: ItemFormProps) {
             return;
         }
         setIsSubmitting(true);
+        try {
+            await onAdd({
+                name: name.trim(),
+                description: description.trim(),
+                price: price,
+                category: category.trim(),
+                color: color.trim(),
+                width_cm: width,
+                height_cm: height,
+                depth_cm: depth,
+                photo_path: null,
+                condition: condition,
+                for_sale: forSale,
+                annotations: [],
 
-        await onAdd({
-            name: name.trim(),
-            description: description.trim(),
-            price: price,
-            category: category.trim(),
-            color: color.trim(),
-            width_cm: width,
-            height_cm: height,
-            depth_cm: depth,
-            photo_path: null,
-            condition: condition,
-            for_sale: forSale,
-            annotations: [],
+            }, photoFile);
 
-        }, photoFile);
-
+            setName("");
+            setDescription("");
+            setPrice(null);
+            setCategory("");
+            setColor("");
+            setWidth(null);
+            setHeight(null);
+            setDepth(null);
+            setCondition("Good");
+            setForSale(false);
+            setPhotoFile(null);
+            onClose();
+        } catch (e) {
+            setError((e as Error).message);
+        } finally {
+            setIsSubmitting(false);
+        }
         setIsSubmitting(false);
-        setName("");
-        setDescription("");
-        setPrice(null);
-        setCategory("");
-        setColor("");
-        setWidth(null);
-        setHeight(null);
-        setDepth(null);
-        setCondition("Good");
-        setForSale(false);
-        setPhotoFile(null);
     }
 
     if (!open) return null;
@@ -84,7 +90,7 @@ function ItemForm({ open, onAdd, onClose }: ItemFormProps) {
                 aria-labelledby="add-title" onClick={(e) => e.stopPropagation()}>
                 <div className="modal__header">
                     <h2 id="add-title">Add item</h2>
-                    <button type="button" className="btn" onClick={onClose} aria-label="Close">✕</button>
+                    <button type="button" className="btn" onClick={() => { setError(""); onClose(); }} aria-label="Close">✕</button>
                 </div>
                 <form className="add-form" onSubmit={handleSubmit}>
                     {error && <p role="alert" className="form-error">{error}</p>}

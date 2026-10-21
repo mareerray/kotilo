@@ -479,3 +479,15 @@ textarea {
         border-radius: 1rem;
     }
 }
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 5.5rem;
+    transform: translateX(-50%);
+    background: #1f2a24;
+    color: #fff;
+    padding: .75rem 1.25rem;
+    border-radius: 999px;
+    z-index: 200;
+}

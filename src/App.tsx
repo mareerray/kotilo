@@ -25,6 +25,7 @@ function App() {
   const [conditionFilter, setConditionFilter] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
   const [error, setError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
 
   // Load items once, when the page opens.
   useEffect(() => {
@@ -58,6 +59,8 @@ function App() {
       const photo_path = photoFile ? await uploadPhoto(photoFile) : null;
       const savedItem = await addItem({ ...newItem, photo_path });
       setItems(prev => [savedItem, ...prev]);
+      setSearch(''); setCategoryFilter(''); setConditionFilter('');
+      showToast('Item added ✓');
     } catch (e) {
       setError((e as Error).message);
     }
@@ -135,6 +138,12 @@ function App() {
   // Show loading message while items are being fetched from the database.
   if (loading) return <p>Loading...</p>;
 
+  // Show success or error messages as toast notifications
+  function showToast(message: string) {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(''), 3000);
+  }
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">
@@ -199,6 +208,7 @@ function App() {
                     />
                   ))}
                 </div>
+                {toastMessage && <div className="toast" role="status">{toastMessage}</div>}
               </section>
             </>
           } />
