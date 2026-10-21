@@ -1,8 +1,18 @@
+/* Theme and page layout */
+
 .home-page {
     --home-beige: #f7f0e0;
     --home-green: #98b8a3;
     --home-ink: #34483d;
-    --home-wall: #7a7568;
+    --home-wall: #89877a;
+
+    --home-linen: #f0e9dc;
+    --home-oat: #eeeadd;
+    --home-pale-sage: #e5ecdf;
+    --home-mist: #e5eeea;
+    --home-glass: #e7d19f;
+    --home-chimney: #c7bcac;
+    --home-chimney-cap: #b8ae9f;
 
     max-width: 760px;
     margin: 0 auto;
@@ -35,7 +45,15 @@
     margin: 0 auto;
 }
 
-/* Roof: dark outer triangle with a sage inner triangle */
+/* Roof wrapper allows smoke to appear outside the roof */
+
+.house-roof-area {
+    position: relative;
+    isolation: isolate;
+    margin-top: 40px;
+}
+
+/* Roof outline */
 
 .house-roof {
     position: relative;
@@ -44,12 +62,40 @@
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
+.house-roof-area .house-roof {
+    z-index: 1;
+}
+
+/* Sage roof */
+
+/* Sage roof with subtle staggered tile seams */
 .house-roof::before {
     content: "";
     position: absolute;
     inset: 9px 14px 6px;
-    background: var(--home-green);
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+    background:
+        /* Horizontal tile rows */
+        repeating-linear-gradient(to bottom,
+            transparent 0 23px,
+            rgb(52 72 61 / 18%) 23px 25px),
+
+        /* Vertical seams on alternating rows */
+        linear-gradient(to right,
+            rgb(52 72 61 / 14%) 2px,
+            transparent 2px) 0 0 / 48px 50px repeat,
+
+        linear-gradient(to right,
+            rgb(52 72 61 / 14%) 2px,
+            transparent 2px) 24px 25px / 48px 50px repeat,
+
+        /* Soft light across the roof */
+        linear-gradient(135deg,
+            rgb(255 255 255 / 16%),
+            transparent 60%),
+
+        var(--home-green);
 }
 
 /* Round attic window */
@@ -72,23 +118,25 @@
             transparent 45%,
             var(--home-wall) 45% 55%,
             transparent 55%),
-        #e7f0ed;
+        var(--home-glass);
 }
 
-/* Walls and room layout */
+/* Walls and indoor room layout */
 
 .home-map {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.6fr 1fr;
     grid-template-areas:
         "bedroom bathroom"
         "living kitchen"
-        "office hallway";
+        "hallway office";
     gap: 5px;
     margin: 0 16px;
     padding: 6px 6px 0;
     background: var(--home-wall);
 }
+
+/* Clickable rooms */
 
 .home-room {
     position: relative;
@@ -108,33 +156,35 @@
 
 .home-room--living-room {
     grid-area: living;
+    background: var(--home-beige);
 }
 
 .home-room--bedroom {
     grid-area: bedroom;
-    background: #ede4d8;
+    background: var(--home-linen);
 }
 
 .home-room--office {
     grid-area: office;
-    background: #eee9dc;
+    background: var(--home-oat);
 }
 
 .home-room--kitchen {
     grid-area: kitchen;
-    background: #e2eadd;
+    background: var(--home-pale-sage);
 }
 
 .home-room--bathroom {
     grid-area: bathroom;
-    background: #e3ece5;
+    background: var(--home-mist);
 }
 
 .home-room--hallway {
     grid-area: hallway;
+    background: var(--home-beige);
 }
 
-/* Small framed windows inside the illustration */
+/* Small framed windows */
 
 .room-window {
     position: absolute;
@@ -154,19 +204,28 @@
             transparent 44%,
             var(--home-wall) 44% 56%,
             transparent 56%),
-        #edf5f2;
+        var(--home-glass);
     pointer-events: none;
 }
 
-.home-room__symbol {
-    font-size: 2rem;
-    line-height: 1.2;
+/* Room icons and names */
+.home-room__name {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
-.home-room__name {
-    font-size: 1.1rem;
-    font-weight: 800;
+.home-room__hint {
+    font-size: 0.9rem;
 }
+
+.home-room__icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: var(--home-wall);
+}
+
+/* Room interaction */
 
 .home-room:hover {
     box-shadow: inset 0 0 0 3px var(--home-green);
@@ -177,41 +236,83 @@
     outline-offset: -6px;
 }
 
-/* Front wall and door */
+/* Front wall and entrance */
 
 .house-entrance {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 70px;
+    height: 30px;
     margin: 0 16px;
     border: 6px solid var(--home-wall);
     border-top-width: 5px;
-    background: var(--home-beige);
+    background: var(--home-wall);
 }
 
+/* Front door */
+
+/* Arched sage door with vertical boards */
 .house-door {
     position: relative;
-    width: 38px;
-    height: 54px;
+    width: 58px;
+    height: 108px;
     border: 3px solid var(--home-wall);
     border-bottom: 0;
-    border-radius: 16px 16px 0 0;
-    background: var(--home-green);
+    border-radius: 22px 22px 0 0;
+
+    background:
+        repeating-linear-gradient(to right,
+            transparent 0 10px,
+            rgb(52 72 61 / 15%) 10px 11px),
+        var(--home-green);
+
+    box-shadow:
+        inset 3px 0 0 rgb(255 255 255 / 18%),
+        inset -3px 0 0 rgb(52 72 61 / 8%),
+        0 0 0 3px rgb(137 135 122 / 15%);
 }
 
+/* Small glowing window in the door */
+.house-door::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 19px;
+    height: 23px;
+    border: 2px solid var(--home-wall);
+    border-radius: 10px 10px 3px 3px;
+
+    background:
+        linear-gradient(to right,
+            transparent 44%,
+            var(--home-wall) 44% 56%,
+            transparent 56%),
+        linear-gradient(to bottom,
+            transparent 45%,
+            var(--home-wall) 45% 55%,
+            transparent 55%),
+        var(--home-glass);
+
+    box-shadow: 0 0 10px rgb(255 222 150 / 25%);
+}
+
+/* Small brass-colored door handle */
 .house-door::after {
     content: "";
     position: absolute;
     right: 5px;
-    top: 28px;
-    width: 5px;
-    height: 5px;
+    top: 42px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid #82734f;
     border-radius: 50%;
-    background: var(--home-ink);
+    background: #d7bd81;
+    box-shadow: 1px 1px 2px rgb(52 72 61 / 18%);
 }
 
-/* Garden */
+/* Garden link */
 
 .house-garden {
     display: flex;
@@ -239,57 +340,28 @@
     outline-offset: 4px;
 }
 
-/* Inventory link */
+/* Yard and decorative trees */
 
-.home-inventory-link {
-    display: inline-flex;
+.house-yard {
+    display: flex;
     align-items: center;
-    min-height: 48px;
-    margin-top: 20px;
-    color: var(--home-ink);
-    font-weight: 700;
-    text-underline-offset: 4px;
+    gap: 10px;
+    margin-top: 12px;
 }
 
-/* Mobile */
-
-@media (max-width: 600px) {
-    .home-page {
-        padding-top: 24px;
-    }
-
-    .home-map,
-    .house-entrance {
-        margin-right: 8px;
-        margin-left: 8px;
-    }
-
-    .home-room {
-        min-height: 135px;
-        padding: 48px 8px 16px;
-        gap: 8px;
-    }
-
-    .home-room__name {
-        font-size: 1rem;
-    }
-
-    .home-room__symbol {
-        font-size: 1.8rem;
-    }
+.house-yard .house-garden {
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
 }
 
-/* Contains the roof and chimney without clipping the smoke */
-.house-roof-area {
-    position: relative;
-    isolation: isolate;
-    margin-top: 40px;
+.yard-tree {
+    flex-shrink: 0;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    line-height: 1;
 }
 
-/* The roof covers the chimney's lower section */
-.house-roof-area .house-roof {
-    z-index: 1;
-}
+/* Chimney */
 
 .house-chimney {
     position: absolute;
@@ -303,10 +375,11 @@
         repeating-linear-gradient(to bottom,
             transparent 0 15px,
             var(--home-wall) 15px 17px),
-        #c9ad99;
+        var(--home-chimney);
 }
 
 /* Chimney cap */
+
 .house-chimney::after {
     content: "";
     position: absolute;
@@ -316,10 +389,11 @@
     height: 10px;
     border: 3px solid var(--home-wall);
     border-radius: 3px;
-    background: #b99a84;
+    background: var(--home-chimney-cap);
 }
 
-/* Soft puffs rising from the chimney */
+/* Animated smoke */
+
 .chimney-smoke {
     position: absolute;
     left: 50%;
@@ -361,10 +435,66 @@
     }
 }
 
-/* Keep the chimney, but hide moving smoke for reduced motion */
+/* Inventory link */
+
+.home-inventory-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    margin-top: 20px;
+    color: var(--home-ink);
+    font-weight: 700;
+    text-underline-offset: 4px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .home-page {
+        padding-top: 24px;
+    }
+
+    .home-map,
+    .house-entrance {
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+
+    .home-room {
+        min-height: 135px;
+        padding: 48px 8px 16px;
+        gap: 8px;
+    }
+
+    .home-room__icon {
+        width: 30px;
+        height: 30px;
+    }
+
+
+    .home-room__name {
+        font-size: 0.875rem;
+    }
+
+    .home-room__symbol {
+        font-size: 1.8rem;
+    }
+}
+
+/* Reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
     .chimney-smoke {
         animation: none;
         opacity: 0;
     }
+}
+
+/* Warm light glowing through the windows */
+.room-window,
+.house-roof__window {
+    box-shadow:
+        inset 0 0 8px rgb(255 246 210 / 85%),
+        0 0 10px 2px rgb(255 222 150 / 35%),
+        0 0 24px 6px rgb(255 222 150 / 18%);
 }

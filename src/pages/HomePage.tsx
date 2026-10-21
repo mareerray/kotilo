@@ -1,15 +1,29 @@
 import { Link } from 'react-router-dom';
 import { rooms } from '../data/rooms';
 import './home.css';
+import {
+    Sofa,
+    BedDouble,
+    BookOpen,
+    DoorOpen,
+    CookingPot,
+    Bath,
+    Sprout,
+    PlantPot,
+    Rose,
+    Birdhouse,
+} from 'lucide-react';
 
-const roomSymbols: Record<string, string> = {
-    'living-room': '🛋️',
-    bedroom: '🛏️',
-    office: '📚',
-    hallway: '🚪',
-    kitchen: '🫖',
-    bathroom: '🛁',
-    outdoor: '🌿',
+import type { LucideIcon } from 'lucide-react';
+
+const roomIcons: Record<string, LucideIcon> = {
+    'living-room': Sofa,
+    bedroom: BedDouble,
+    office: BookOpen,
+    hallway: DoorOpen,
+    kitchen: CookingPot,
+    bathroom: Bath,
+    outdoor: Sprout,
 };
 
 function HomePage() {
@@ -39,24 +53,31 @@ function HomePage() {
                 <div className="home-map" aria-label="Choose a room">
                     {rooms
                         .filter((room) => room.id !== 'outdoor')
-                        .map((room) => (
-                            <Link
-                                key={room.id}
-                                to={`/rooms/${room.id}`}
-                                className={`home-room home-room--${room.id}`}
-                            >
-                                <span className="room-window" aria-hidden="true" />
+                        .map((room) => {
+                            const Icon = roomIcons[room.id];
 
-                                <span className="home-room__symbol" aria-hidden="true">
-                                    {roomSymbols[room.id]}
-                                </span>
+                            return (
+                                <Link
+                                    key={room.id}
+                                    to={`/rooms/${room.id}`}
+                                    className={`home-room home-room--${room.id}`}
+                                >
+                                    <span className="room-window" aria-hidden="true" />
 
-                                <span className="home-room__name">
-                                    {room.name}
-                                </span>
-                            </Link>
-                        ))}
-                </div>
+                                    {Icon && (
+                                        <Icon
+                                            className="home-room__icon"
+                                            strokeWidth={1.5}
+                                            aria-hidden="true"
+                                        />
+                                    )}
+
+                                    <span className="home-room__name">
+                                        {room.name}
+                                    </span>
+                                </Link>
+                            );
+                        })}                </div>
 
                 {/* Decorative entrance */}
                 <div className="house-entrance" aria-hidden="true">
@@ -72,9 +93,28 @@ function HomePage() {
                             to={`/rooms/${room.id}`}
                             className="house-garden"
                         >
-                            <span aria-hidden="true">🌿</span>
+
+                            <PlantPot
+                                size={28}
+                                strokeWidth={1.5}
+                                aria-hidden="true"
+                            />
+                            <Sprout
+                                size={28}
+                                strokeWidth={1.5}
+                                aria-hidden="true"
+                            />
                             <span>{room.name}</span>
-                            <span aria-hidden="true">🌼</span>
+                            <Rose
+                                size={28}
+                                strokeWidth={1.5}
+                                aria-hidden="true"
+                            />     
+                            <Birdhouse
+                                size={28}
+                                strokeWidth={1.5}
+                                aria-hidden="true"
+                            />
                         </Link>
                     ))}
             </div>            <Link className="home-inventory-link" to="/inventory">
