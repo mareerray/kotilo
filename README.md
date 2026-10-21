@@ -22,7 +22,8 @@ TypeScript and Supabase.
 - [x] Step 7: Measurement annotations on photos
 - [x] Step 8: Search and filter
 - [x] Step 9: Deploy to Vercel
-- [ ] Step 10: Mobile-friendly and PWA
+- [x] Step 10: Mobile-friendly and PWA
+- [x] Step 11: Pagination
 
 
 ## Planned features
