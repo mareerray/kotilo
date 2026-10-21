@@ -35,8 +35,22 @@ function HomePage() {
             </header>
 
             <div className="home-house">
+                <div className="house-sky" aria-hidden="true">
+                    <span className="cloud cloud-1" />
+                    <span className="cloud cloud-2" />
+                    <span className="cloud cloud-3" />
+                    <span className="cloud cloud-4" />
+                    <span className="cloud cloud-5" />
+
+                    <span className="bird bird-1">🕊️</span>
+                    <span className="bird bird-2">🕊️</span>
+                    <span className="bird bird-3">🕊️</span>
+                </div>
+
                 {/* Decorative roof */}
                 <div className="house-roof-area" aria-hidden="true">
+
+
                     <div className="house-chimney">
                         <span className="chimney-smoke chimney-smoke--one" />
                         <span className="chimney-smoke chimney-smoke--two" />
@@ -108,7 +122,7 @@ function HomePage() {
                                 size={28}
                                 strokeWidth={1.5}
                                 aria-hidden="true"
-                            />     
+                            />
                             <Birdhouse
                                 size={28}
                                 strokeWidth={1.5}
