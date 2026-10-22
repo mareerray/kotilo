@@ -26,6 +26,7 @@ TypeScript and Supabase.
 - [x] Step 11: Pagination
 - [x] Step 12: Home map & room navigation
 - [x] Step 13: Furniture placement inside each room
+- [x] Step 14: Global background music toggle in header
 
 
 ## Planned features

@@ -25,6 +25,7 @@
 
 .home-intro {
     margin-bottom: 28px;
+    text-align: center;
 }
 
 .home-intro h1 {
@@ -32,10 +33,12 @@
     font-size: clamp(2rem, 6vw, 3rem);
     line-height: 1.15;
     font-weight: 800;
+    text-align: center;
 }
 
 .home-intro>p:last-child {
     margin: 0;
+    text-align: center;
 }
 
 /* Whole house */
@@ -451,7 +454,11 @@
 
 @media (max-width: 600px) {
     .home-page {
-        padding-top: 24px;
+        padding-top: 18px;
+    }
+
+    .home-intro p{
+        font-size: 0.85rem;
     }
 
     /* Scale the entire house scene on small screens */
