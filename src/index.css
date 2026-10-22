@@ -10,6 +10,12 @@
   --font-main: "Nunito", system-ui, sans-serif;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
     overflow-x: clip;
@@ -37,4 +43,3 @@ body {
   object-fit: contain;
 }
 
-/* 
