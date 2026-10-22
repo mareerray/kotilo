@@ -7,6 +7,7 @@ import type { Item } from './types/item';
 import type { Annotation } from './types/annotation';
 import { supabase } from './lib/supabase';
 import { updateAnnotations } from './lib/itemsApi';
+import { rooms } from './data/rooms';
 import StatsBar from './components/StatesBar';
 import AppHeader from './components/AppHeader';
 import AboutKotilo from './components/AboutKotilo';
@@ -135,7 +136,8 @@ function App() {
     }
   }
 
-  const categories = [...new Set(items.map((item) => item.category).filter(Boolean))].sort();
+  const categories = rooms.map((room) => room.name);
+
 
   const visibleItems = items.filter((item) => {
     const text = `${item.name} ${item.description} ${item.category} ${item.color}`.toLowerCase();

@@ -5,6 +5,7 @@ import type { Annotation } from '../types/annotation';
 import { supabase } from '../lib/supabase';
 import PhotoLoadingStatus from './PhotoLoadingStatus';
 import PhotoAnnotator from './PhotoAnnotator';
+import { rooms } from '../data/rooms';
 
 type ItemCardProps = {
     item: Item;
@@ -92,12 +93,23 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
                     />
                 </label>
 
-                <label className="field">
+                <label className="field" htmlFor="edit-item-category">
                     Category
-                    <input
+                    <select
+                        id="edit-item-category"
                         value={draftItem.category}
-                        onChange={(e) => setDraftItem({ ...draftItem, category: e.target.value })}
-                    />
+                        onChange={(e) =>
+                            setDraftItem({ ...draftItem, category: e.target.value })
+                        }
+                    >
+                        <option value="">Unassigned</option>
+
+                        {rooms.map((room) => (
+                            <option key={room.id} value={room.name}>
+                                {room.name}
+                            </option>
+                        ))}
+                    </select>
                 </label>
 
                 <label className="field">

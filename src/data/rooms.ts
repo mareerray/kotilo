@@ -1,9 +1,14 @@
+export type Room = {
+    id: string;
+    name: string;
+};
+
 export const rooms = [
-    { id: 'living-room', name: 'Living room' },
-    { id: 'bedroom', name: 'Bedroom' },
-    { id: 'office', name: 'Office' },
-    { id: 'hallway', name: 'Hallway' },
-    { id: 'kitchen', name: 'Kitchen' },
-    { id: 'bathroom', name: 'Bathroom' },
-    { id: 'outdoor', name: 'Outdoor' },
+    { id: 1, name: 'Living room' },
+    { id: 2, name: 'Bedroom' },
+    { id: 3, name: 'Office' },
+    { id: 4, name: 'Hallway' },
+    { id: 5, name: 'Kitchen' },
+    { id: 6, name: 'Bathroom' },
+    { id: 7, name: 'Outdoor' },
 ] as const;
