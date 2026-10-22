@@ -519,7 +519,7 @@
     height: 30px;
     border-radius: 999px;
     background: rgba(249, 229, 229, 0.75);
-    box-shadow: 0 6px 14px rgb(52 72 61 / 8%);
+    box-shadow: 0 6px 10px rgb(52 72 61 / 24%);
     animation: drift 55s linear infinite;
 }
 
