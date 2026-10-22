@@ -1,5 +1,4 @@
 :root {
-    /* your theme */
     --bg: #fff7ed;
     --card: #ffffff;
     --accent: #f9a8d4;
@@ -9,14 +8,12 @@
     --radius: 18px;
     --shadow: 0 8px 24px rgba(249, 168, 212, 0.25);
 
-    /* aliases used by the dashboard CSS */
     --surface: var(--card);
     --primary: var(--accent);
     --primary-soft: var(--accent-soft);
     --text-muted: var(--muted);
     --border: #f5e1ec;
 
-    /* darker pink for text, so it stays readable */
     --accent-strong: #be185d;
     --danger: #dc2626;
     --danger-soft: #fef2f2;

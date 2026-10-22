@@ -4,7 +4,7 @@ import type { Item } from '../types/item';
 import type { NewItem } from '../lib/itemsApi';
 import type { Annotation } from '../types/annotation';
 import { rooms } from '../data/rooms';
-import StatsBar from '../components/StatesBar';
+import StatsBar from '../components/StatsBar';
 import ItemForm from '../components/ItemForm';
 import ItemFilters from '../components/ItemFilters';
 import Pagination from '../components/Pagination';

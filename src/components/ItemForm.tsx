@@ -7,7 +7,7 @@ type ItemFormProps = {
     onClose: () => void;
     onAdd: (
         item: NewItem,
-        photoFile: File | null) => Promise<void>;
+        photoFile: File | null) => void | Promise<void>;
 };
 
 function ItemForm({ open, onAdd, onClose }: ItemFormProps) {
