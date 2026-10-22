@@ -789,9 +789,9 @@
     }
 }
 
-@media (max-width: 375px){
+@media (max-width: 380px){
     .house-sky {
-        top: 30%;
+        top: 24%;
         height: 100px;
     }
 }
