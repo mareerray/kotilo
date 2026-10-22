@@ -576,7 +576,7 @@
     width: 100px;
     height: 30px;
     border-radius: 999px;
-    background: rgba(249, 229, 229, 0.9);
+    background: var(--clouds, #f9e5e5e6);
     box-shadow: 0 6px 10px rgb(52 72 61 / 24%);
     animation: drift 55s linear infinite;
 }
