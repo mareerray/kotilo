@@ -1,4 +1,4 @@
-/* Tablet and small desktop: gently scale down */
+/* ----------- Tablet and small desktop: gently scale down ---------- */
 @media (max-width: 1000px) {
     .app-shell {
         padding: 12px;
@@ -69,6 +69,8 @@
         height: 2.75rem;
     }
 }
+
+/* ----------- Mobile: single-column layout, touch-friendly ---------- */
 
 @media (max-width: 600px) {
     /* Page spacing */

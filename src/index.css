@@ -65,7 +65,7 @@ body {
   object-fit: contain;
 }
 
-/* Sound toggle */
+/* -------- Sound toggle ------------ */
 .sound-toggle {
     display: inline-flex;
     align-items: center;
@@ -89,7 +89,7 @@ body {
     background: var(--accent);
 }
 
-/* Buttons and inputs */
+/* ------------ Buttons and inputs ------------ */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -145,7 +145,7 @@ textarea {
     gap: 8px;
 }
 
-/* Stats */
+/* ------------ Stats ------------ */
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -191,8 +191,8 @@ textarea {
     font-variant-numeric: tabular-nums;
 }
 
-/* Add panel */
-.add-panel {
+/* ------------ Add panel ------------ */
+/* .add-panel {
     background: var(--surface);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -204,7 +204,7 @@ textarea {
     cursor: pointer;
     font-weight: 600;
     color: var(--primary);
-}
+} */
 
 .add-form {
     display: grid;
@@ -230,7 +230,7 @@ textarea {
     grid-column: 1/ -1;
 }
 
-/* Filters */
+/* ------------ Search & Filters ------------ */
 .item-filters {
     display: flex;
     flex-wrap: wrap;
@@ -267,7 +267,7 @@ textarea {
     margin: 8px 0 16px;
 }
 
-/* Cards */
+/* -------------- Item Cards -------------- */
 .items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
@@ -318,6 +318,10 @@ textarea {
     font-weight: 600;
     padding: 3px 12px;
     border-radius: 999px;
+    background: #ede9fe;
+    color: #5b21b6;
+    align-items: center;
+    display: inline-flex;
 }
 
 .item-card__condition--new {
@@ -338,11 +342,6 @@ textarea {
 .item-card__condition--poor {
     background: #ffe4e6;
     color: #9f1239;
-}
-
-.item-card__sale {
-    background: #ede9fe;
-    color: #5b21b6;
 }
 
 .item-card__price {
@@ -390,7 +389,7 @@ textarea {
     gap: 4px;
 }
 
-/* Edit mode */
+/* -------------- Edit mode -------------- */
 .field {
     display: flex;
     flex-direction: column;
@@ -408,71 +407,7 @@ textarea {
     font-size: 13px;
 }
 
-/* Measurement lines (Step 7) */
-.annotator {
-    position: relative;
-    width: 100%;
-    cursor: crosshair;
-    container-type: inline-size;
-}
-
-.annotator__lines {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.line {
-    stroke: #e11d48;
-    stroke-width: 2;
-    vector-effect: non-scaling-stroke;
-}
-
-.line--draft {
-    stroke: #2563eb;
-    stroke-dasharray: 6 4;
-}
-
-.dot {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    transform: translate(-50%, -50%);
-    background: #e11d48;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.dot--draft {
-    background: #2563eb;
-}
-
-.line-label {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    color: #e11d48;
-    border: 1px solid #e11d48;
-    border-radius: 6px;
-    padding: 0.2em 0.5em;
-    font-size: clamp(10px, 3cqw, 14px);
-    white-space: nowrap;
-    max-width: 40cqw;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-}
-
-.annotation-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
-}
-
+/* -------------- Floating Action Button -------------- */
 .fab {
     position: fixed;
     right: 1rem;
@@ -517,8 +452,7 @@ textarea {
     bottom: 1rem; 
     background: var(--primary, #d1fae5);
     color: #fff;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.5rem;
     border: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
 
@@ -528,6 +462,7 @@ textarea {
     border-color: var(--primary);
 }
 
+/* -------------- Modal -------------- */
 .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -564,6 +499,7 @@ textarea {
     }
 }
 
+/* -------------- Toast message -------------- */
 .toast {
     position: fixed;
     left: 50%;
@@ -576,6 +512,7 @@ textarea {
     z-index: 200;
 }
 
+/* -------------- Pagination -------------- */
 .pagination {
     display: flex;
     justify-content: center;

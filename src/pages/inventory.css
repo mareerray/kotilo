@@ -372,6 +372,13 @@ button:disabled {
  * Photo annotation styles
  ********************* */
 
+.field-note-tap {
+    margin-top: 8px;
+    color: #746a80;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
 .annotator {
     position: relative;
     width: 100%;
@@ -430,4 +437,15 @@ button:disabled {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
+}
+
+.annotation-form {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    margin-top: 8px;
+    background: var(--muted);
+    padding: 6px 8px;
+    font-size: clamp(8px, 3cqw, 12px);
+    border-radius: 8px;
 }
