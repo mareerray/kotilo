@@ -200,12 +200,3 @@
         padding: 10px;
     }
 }
-
-/* Extra-narrow screens */
-/* @media (max-width: 360px) {
-    .stats,
-    .item-filters,
-    .field-row {
-        grid-template-columns: minmax(0, 1fr);
-    }
-} */
