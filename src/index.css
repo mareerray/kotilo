@@ -43,3 +43,19 @@ body {
   object-fit: contain;
 }
 
+.sound-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.sound-toggle:hover {
+    background: var(--accent);
+}

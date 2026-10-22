@@ -451,7 +451,11 @@
 
 @media (max-width: 600px) {
     .home-page {
-        padding-top: 24px;
+        padding-top: 18px;
+    }
+
+    .home-intro p{
+        font-size: 0.85rem;
     }
 
     /* Scale the entire house scene on small screens */
