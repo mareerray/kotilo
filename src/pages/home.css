@@ -988,8 +988,8 @@
 
 .garden-birdhouse {
     position: absolute;
-    top: 56px;
-    left: 14px;
+    top: 24px;
+    left: 18px;
     width: 30px;
     height: 34px;
     background: #b98a63;
@@ -1172,12 +1172,6 @@
     transform: scale(0.8);
 }
 
-.garden-path__stone--4 {
-    bottom: 90px;
-    left: 88px;
-    transform: scale(0.7);
-}
-
 /* Butterfly */
 .garden-butterfly {
     position: absolute;
@@ -1312,8 +1306,8 @@
     .garden-birdhouse {
         width: 24px;
         height: 28px;
-        top: 60px;
-        left: 10px;
+        top: 30px;
+        left: 14px;
     }
 
     .garden-birdhouse::before {
