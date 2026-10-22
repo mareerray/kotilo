@@ -1,3 +1,75 @@
+/* Tablet and small desktop: gently scale down */
+@media (max-width: 1000px) {
+    .app-shell {
+        padding: 12px;
+    }
+
+    .app-title {
+        font-size: 1.6rem;
+        margin: 16px auto 12px;
+    }
+
+    /* Stats: two per row instead of four */
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .stat {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .stat__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .stat__value {
+        font-size: 1.35rem;
+    }
+
+    /* Cards: two per row, tighter padding */
+    .items-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .item-card {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .item-card__title {
+        font-size: 1.1rem;
+    }
+
+    .item-card__price {
+        font-size: 1.1rem;
+    }
+
+    /* Filters take less vertical space */
+    .item-filters {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .search-box {
+        flex-basis: 200px;
+    }
+
+    /* Form is narrower */
+    .add-form {
+        gap: 10px;
+    }
+
+    /* Slightly smaller floating buttons */
+    .fab {
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+}
+
 @media (max-width: 600px) {
     /* Page spacing */
     .app-shell {

@@ -1,4 +1,4 @@
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Trash2, Palette, TextAlignStart } from 'lucide-react';
 import { useState } from 'react';
 import type { Item } from '../types/item';
 import type { Annotation } from '../types/annotation';
@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabase';
 import PhotoLoadingStatus from './PhotoLoadingStatus';
 import PhotoAnnotator from './PhotoAnnotator';
 import { rooms } from '../data/rooms';
+import { roomIcons } from '../data/roomIcons';
 
 type ItemCardProps = {
     item: Item;
@@ -19,6 +20,10 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
     const [isSaving, setIsSaving] = useState(false);
     const [draftItem, setDraftItem] = useState<Item>(item);
     const [newPhoto, setNewPhoto] = useState<File | null>(null);
+
+    const room = rooms.find((r) => r.name === item.category);
+    const RoomIcon = roomIcons[item.category];
+    console.log('category:', item.category, 'room:', room, 'icon:', room ? roomIcons[room.id] : 'no room');
 
     const photoUrl = item.photo_path
         ? supabase.storage.from('item-photos').getPublicUrl(item.photo_path).data.publicUrl
@@ -256,9 +261,20 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
             </dl>
 
             <div className="item-card__details">
-                <p>{item.category || 'No category'} </p> |
-                <p> {item.color || 'No color'}</p> |
-                {item.description && <p>{item.description}</p>}
+                <p>
+                    {RoomIcon && <RoomIcon size={14} aria-hidden="true" />}
+                    {item.category || 'No category'}
+                </p> |
+                <p>
+                    <Palette size={14} aria-hidden="true" />
+                    {item.color || 'No color'}
+                </p>
+                |
+                {item.description && (
+                    <p>
+                        <TextAlignStart size={14} aria-hidden="true" />
+                        {item.description}
+                    </p>)}
             </div>
 
             <footer className="item-card__actions">

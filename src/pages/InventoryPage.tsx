@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { ArrowUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { Item } from '../types/item';
@@ -9,6 +11,9 @@ import ItemForm from '../components/ItemForm';
 import ItemFilters from '../components/ItemFilters';
 import Pagination from '../components/Pagination';
 import ItemCard from '../components/ItemCard';
+
+import '../site.css';
+import './inventory.css';
 
 type InventoryPageProps = {
     items: Item[];
@@ -87,12 +92,33 @@ function InventoryPage({
 
     return (
         <>
+            <Link
+                to="/"
+                className="fab fab--home"
+                aria-label="Go to my home"
+            >
+                <img
+                    src="/kotilo-logo-nobg.png"
+                    alt=""
+                    className="fab__logo"
+                />
+            </Link>
+
             <button
                 className="fab"
                 onClick={() => setShowAddForm(true)}
                 aria-label="Add item"
             >
                 +
+            </button>
+
+            <button
+                type="button"
+                className="fab fab--top"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                aria-label="Scroll to top"
+            >
+                <ArrowUp size={20} />
             </button>
 
             <ItemForm
@@ -107,7 +133,7 @@ function InventoryPage({
             <section className="dashboard-intro">
                 <p className="section-eyebrow">Your personal storage dashboard</p>
                 <h1>A little order. A little peace of mind.</h1>
-                <p>
+                <p className="dashboard-intro-text">
                     Know what you have, keep measurements close,
                     and make room for what matters.
                 </p>

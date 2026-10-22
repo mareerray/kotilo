@@ -158,6 +158,7 @@ function App() {
           />
 
           <Route path="/about" element={<AboutKotilo />} />
+
         </Routes>
       </main>
 
