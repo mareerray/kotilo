@@ -570,7 +570,7 @@
     width: 100px;
     height: 30px;
     border-radius: 999px;
-    background: rgba(249, 229, 229, 0.75);
+    background: rgba(249, 229, 229, 0.9);
     box-shadow: 0 6px 10px rgb(52 72 61 / 24%);
     animation: drift 55s linear infinite;
 }
@@ -643,7 +643,7 @@
 
 .bird {
     position: absolute;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     opacity: 0.65;
     animation: fly-across 34s linear infinite;
 }
@@ -680,7 +680,7 @@
 .bird-3 {
     top: 58px;
     left: -130px;
-    font-size: 0.8rem;
+    font-size: 1.25rem;
     animation-delay: -12s;
 }
 
@@ -781,7 +781,7 @@
     }
 
     .bird {
-        font-size: 0.9rem;
+        font-size: 1rem;
         animation-duration: 14s;
     }
 
@@ -799,14 +799,14 @@
 
     .bird-2 {
         top: 64px;
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         animation-duration: 16s;
         animation-delay: -4s;
     }
 
     .bird-3 {
         top: 40px;
-        font-size: 0.65rem;
+        font-size: 0.75rem;
         animation-duration: 18s;
         animation-delay: -8s;
     }
@@ -988,7 +988,7 @@
 
 .garden-birdhouse {
     position: absolute;
-    top: 20px;
+    top: 56px;
     left: 14px;
     width: 30px;
     height: 34px;
@@ -1139,7 +1139,7 @@
     bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
+    width: 220px;
     height: 34px;
     pointer-events: none;
 }
@@ -1156,20 +1156,26 @@
 }
 
 .garden-path__stone--1 {
-    bottom: -4px;
+    bottom: 0px;
     left: -8px;
 }
 
 .garden-path__stone--2 {
-    bottom: 20px;
-    left: 14px;
+    bottom: 30px;
+    left: 22px;
     transform: scale(0.9);
 }
 
 .garden-path__stone--3 {
-    bottom: 50px;
-    left: 38px;
+    bottom: 60px;
+    left: 56px;
     transform: scale(0.8);
+}
+
+.garden-path__stone--4 {
+    bottom: 90px;
+    left: 88px;
+    transform: scale(0.7);
 }
 
 /* Butterfly */
@@ -1306,7 +1312,7 @@
     .garden-birdhouse {
         width: 24px;
         height: 28px;
-        top: 20px;
+        top: 60px;
         left: 10px;
     }
 
@@ -1324,7 +1330,7 @@
     }
 
     .garden-planter {
-        width: 40px;
+        width: 50px;
         height: 20px;
     }
 
@@ -1352,21 +1358,8 @@
     }
 
     .garden-path {
-        width: 120px;
+        width: 200px;
         height: 28px;
-    }
-
-    .garden-path__stone {
-        width: 28px;
-        height: 8px;
-    }
-
-    .garden-path__stone--2 {
-        left: 25px;
-    }
-
-    .garden-path__stone--3 {
-        left: 40px;
     }
 
     .garden-butterfly {

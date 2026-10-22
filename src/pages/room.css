@@ -1,0 +1,29 @@
+.room-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.room-item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.room-item-card__photo {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.room-item-card__no-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    background: #eee;
+    border-radius: 12px;
+}

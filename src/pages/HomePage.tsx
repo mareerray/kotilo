@@ -62,7 +62,7 @@ function HomePage() {
                 {/* Indoor rooms */}
                 <div className="home-map" aria-label="Choose a room">
                     {rooms
-                        .filter((room) => room.id !== 'outdoor')
+                        .filter((room) => room.id !== 7)
                         .map((room) => {
                             const Icon = roomIcons[room.id];
 
@@ -96,7 +96,7 @@ function HomePage() {
 
                 {/* Outdoor is outside the house */}
                 {rooms
-                    .filter((room) => room.id === 'outdoor')
+                    .filter((room) => room.id === 7)
                     .map((room) => (
                         <Link
                             key={room.id}
@@ -125,6 +125,7 @@ function HomePage() {
                                 <span className="garden-path__stone garden-path__stone--1" />
                                 <span className="garden-path__stone garden-path__stone--2" />
                                 <span className="garden-path__stone garden-path__stone--3" />
+                                <span className="garden-path__stone garden-path__stone--4" />
                             </span>
 
                             {/* Watering can */}
