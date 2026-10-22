@@ -133,7 +133,7 @@ function InventoryPage({
             <section className="dashboard-intro">
                 <p className="section-eyebrow">Your personal storage dashboard</p>
                 <h1>A little order. A little peace of mind.</h1>
-                <p className="dashboard-intro-text">
+                <p className="dashboard-intro">
                     Know what you have, keep measurements close,
                     and make room for what matters.
                 </p>
