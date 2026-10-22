@@ -18,6 +18,7 @@
     margin: 0 auto;
     padding: 32px 0 48px;
     color: var(--home-ink);
+    overflow-x: clip;
 }
 
 /* Welcome text */
@@ -559,8 +560,8 @@
 .house-sky {
     position: absolute;
     bottom: 65%;
-    left: -20px;
-    right: -20px;
+    left: 0;
+    right: 0;
     height: 130px;
     pointer-events: none;
     overflow: hidden;
@@ -860,7 +861,7 @@
 /* OnePlus Nord CE4 Lite has viewport size approx.  356 x 695 Pixels */
 
 
-/* Plants beside the house */
+/* ------------- Plants beside the house--------------- */
 
 .house-plants {
     position: relative;
@@ -947,21 +948,21 @@
 
 @media (max-width: 600px) {
     .house-bush--left {
-        left: -24px;
+        left: -14px;
         bottom: 80px;
         transform: scale(0.6);
         transform-origin: bottom left;
     }
 
     .house-tree-group {
-        right: -20px;
+        right: -6px;
         bottom: 110px;
         transform: scale(0.6);
         transform-origin: bottom right;
     }
 
     .house-bush--right-front {
-        right: -12px;
+        right: -6px;
         bottom: -55px;
     }
 }
