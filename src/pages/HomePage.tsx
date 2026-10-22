@@ -125,6 +125,7 @@ function HomePage() {
                                 <span className="garden-path__stone garden-path__stone--1" />
                                 <span className="garden-path__stone garden-path__stone--2" />
                                 <span className="garden-path__stone garden-path__stone--3" />
+                                <span className="garden-path__stone garden-path__stone--4" />
                             </span>
 
                             {/* Watering can */}
