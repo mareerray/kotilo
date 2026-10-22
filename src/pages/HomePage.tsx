@@ -51,7 +51,7 @@ function HomePage() {
                                 <Link
                                     key={room.id}
                                     to={`/rooms/${room.id}`}
-                                    className={`home-room home-room--${room.id}`}
+                                    className={`home-room home-room--${room.slug}`}
                                 >
                                     <span className="room-window" aria-hidden="true" />
 

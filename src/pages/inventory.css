@@ -250,7 +250,7 @@ button:disabled {
     padding: 12px;
     border: 1px solid #f0e5ed;
     border-radius: 16px;
-    background: #fbf8fa;
+    background: var(--card-surface, #fbf8fa);
 }
 
 /*

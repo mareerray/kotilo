@@ -51,21 +51,24 @@ function RoomPage() {
     }
 
     return (
-        <section className="home-page">
-            <Link className="home-inventory-link" to="/">
-                ← My home
-            </Link>
+        <section className="room-page">
+            <Link className="room-page__back" to="/">← My home</Link>
 
-            <header className="home-intro">
-                <h1>{room.name}</h1>
-                <p>A little place for the things you keep.</p>
+            <header className="room-page__header">
+                <h1 className="room-page__title">{room.name}</h1>
+                <p className="room-page__subtitle">A little place for the things you keep.</p>
+                <span className="room-page__count">
+                    {items.length} {items.length === 1 ? 'item' : 'items'}
+                </span>
             </header>
 
             {loading && <p>Loading items...</p>}
             {error && <p>Error: {error}</p>}
 
             {!loading && !error && items.length === 0 && (
-                <p>No items in this room yet.</p>
+                <div className="room-page__empty">
+                    <p>No items in this room yet.</p>
+                </div>
             )}
 
             <div className="room-showcase">
@@ -94,6 +97,27 @@ function RoomPage() {
             <Link className="home-inventory-link" to="/inventory">
                 Browse my inventory →
             </Link>
+
+            <Link
+                to="/"
+                className="fab room-fab--home"
+                aria-label="Go to my home"
+            >
+                <img
+                    src="/kotilo-logo-nobg.png"
+                    alt=""
+                    className="fab__logo"
+                />
+            </Link>
+
+            <button
+                type="button"
+                className="fab room-fab--top"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                aria-label="Scroll to top"
+            >
+                ↑
+            </button>
         </section>
     );
 }
