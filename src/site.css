@@ -55,7 +55,7 @@
 }
 
 .section-eyebrow {
-    margin: 0 0 8px;
+    margin: 12px 0 8px;
     color: #7a2b52;
     font-size: 0.8rem;
     font-weight: 800;
@@ -229,7 +229,7 @@
     }
 
     .dashboard-intro {
-        padding: 28px 0 24px;
+        padding: 10px 0 10px;
     }
 
     .about-kotilo {
@@ -298,8 +298,12 @@
         font-size: 0.75rem;
     }
 
+    .dashboard-intro h1 {
+        margin: 0 0 8px;
+    }
+
     .dashboard-intro>p:last-child {
-        font-size: 0.5rem;
+        font-size: 0.85rem;
     }
     
     .site-footer__author {

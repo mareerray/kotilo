@@ -16,6 +16,7 @@ import HomePage from './pages/HomePage';
 import RoomPage from './pages/RoomPage';
 import InventoryPage from './pages/InventoryPage';
 import SoundToggle from './components/SoundToggle';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [items, setItems] = useState<Item[]>([]);
@@ -137,11 +138,12 @@ function App() {
             <SoundToggle isPlaying={isPlaying} onToggle={toggleSound} />
           }
         />
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
 
           <Route path="/rooms/:roomId" element={<RoomPage />} />
-
+          
           <Route
             path="/inventory"
             element={
