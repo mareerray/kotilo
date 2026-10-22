@@ -30,19 +30,19 @@ function HomePage() {
                 <h1 id="home-title">Welcome home.</h1>
                 <p>Choose a room and find the things you keep there.</p>
             </header>
+            <div className="house-sky" aria-hidden="true">
+                <span className="cloud cloud-1" />
+                <span className="cloud cloud-2" />
+                <span className="cloud cloud-3" />
+                <span className="cloud cloud-4" />
+                <span className="cloud cloud-5" />
 
+                <span className="bird bird-1 bird-icon">🕊️</span>
+                <span className="bird bird-2 bird-icon">🕊️</span>
+                <span className="bird bird-3 bird-icon">🕊️</span>
+            </div>
             <div className="home-house">
-                <div className="house-sky" aria-hidden="true">
-                    <span className="cloud cloud-1" />
-                    <span className="cloud cloud-2" />
-                    <span className="cloud cloud-3" />
-                    <span className="cloud cloud-4" />
-                    <span className="cloud cloud-5" />
-
-                    <span className="bird bird-1 bird-icon">🕊️</span>
-                    <span className="bird bird-2 bird-icon">🕊️</span>
-                    <span className="bird bird-3 bird-icon">🕊️</span>
-                </div>
+    
 
                 {/* Decorative roof */}
                 <div className="house-roof-area" aria-hidden="true">

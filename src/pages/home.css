@@ -556,7 +556,7 @@
 /* Soft outdoor scene */
 .house-sky {
     position: absolute;
-    bottom: 65%;
+    bottom: 60%;
     left: 0;
     right: 0;
     height: 130px;
@@ -706,17 +706,10 @@
     }
 }
 
-@media (max-width: 1200px) {
+/* ----------  Mobile view: smaller, faster sky animation ----------*/
+@media (max-width: 600px) {
     .house-sky {
-        top: 15%;
-        height: 150px;
-    }
-}
-
-/* Mobile view: smaller, faster sky animation */
-@media (max-width: 670px) {
-    .house-sky {
-        top: 20%;
+        top: 30%;
         height: 100px;
     }
 
@@ -729,15 +722,15 @@
     .cloud::before {
         width: 30px;
         height: 30px;
-        top: -14px;
-        left: 12px;
+        top: -18px;
+        left: 16px;
     }
 
     .cloud::after {
         width: 21px;
         height: 21px;
         top: -9px;
-        right: 13px;
+        right: 15px;
     }
 
     .cloud-1,
@@ -754,25 +747,25 @@
     }
 
     .cloud-2 {
-        top: 48px;
+        top: 50px;
         scale: 0.72;
         animation-delay: -6s;
     }
 
     .cloud-3 {
-        top: 42px;
+        top: 40px;
         scale: 0.55;
         animation-delay: -12s;
     }
 
     .cloud-4 {
-        top: 60px;
+        top: 68px;
         scale: 0.8;
-        animation-delay: -5s;
+        animation-delay: -19s;
     }
 
     .cloud-5 {
-        top: 20px;
+        top: 18px;
         scale: 0.62;
         animation-delay: -24s;
     }
@@ -783,7 +776,7 @@
         }
 
         to {
-            transform: translate3d(calc(100vw + 450px), 0, 0);
+            transform: translate3d(calc(100vw / 0.72 + 240px), 0, 0);
         }
     }
 
@@ -838,20 +831,6 @@
         to {
             transform: translate3d(calc(100vw + 80px), 0, 0) scaleX(-1);
         }
-    }
-}
-
-@media (max-width: 380px) {
-    .house-sky {
-        top: 30%;
-        height: 100px;
-    }
-}
-
-@media (max-width: 360px) {
-    .house-sky {
-        top: 36%;
-        height: 100px;
     }
 }
 
