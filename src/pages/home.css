@@ -709,7 +709,7 @@
 /* ----------  Mobile view: smaller, faster sky animation ----------*/
 @media (max-width: 600px) {
     .house-sky {
-        top: 30%;
+        top: 26%;
         height: 100px;
     }
 
@@ -835,7 +835,12 @@
 }
 
 /* OnePlus Nord CE4 Lite has viewport size approx.  356 x 695 Pixels */
-
+@media (max-width: 375px) {
+    .house-sky {
+        top: 26%;
+        height: 100px;
+    }
+}
 
 /* ------------- Plants beside the house--------------- */
 
