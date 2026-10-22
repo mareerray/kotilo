@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { ArrowUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { Item } from '../types/item';
@@ -118,7 +117,7 @@ function InventoryPage({
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 aria-label="Scroll to top"
             >
-                <ArrowUp size={20} />
+                ↑
             </button>
 
             <ItemForm

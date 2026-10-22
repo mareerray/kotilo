@@ -1,27 +1,8 @@
 import { Link } from 'react-router-dom';
 import { rooms } from '../data/rooms';
+import { roomIcons } from '../data/roomIcons';
 import './home.css';
-import {
-    Sofa,
-    BedDouble,
-    NotebookPen,
-    DoorOpen,
-    CookingPot,
-    Bath,
-    Sprout,
-} from 'lucide-react';
 
-import type { LucideIcon } from 'lucide-react';
-
-const roomIcons: Record<string, LucideIcon> = {
-    'living-room': Sofa,
-    bedroom: BedDouble,
-    office: NotebookPen,
-    hallway: DoorOpen,
-    kitchen: CookingPot,
-    bathroom: Bath,
-    outdoor: Sprout,
-};
 function HomePage() {
     return (
         <section className="home-page" aria-labelledby="home-title">
@@ -62,9 +43,9 @@ function HomePage() {
                 {/* Indoor rooms */}
                 <div className="home-map" aria-label="Choose a room">
                     {rooms
-                        .filter((room) => room.id !== 7)
+                        .filter((room) => room.slug !== 'outdoor')
                         .map((room) => {
-                            const Icon = roomIcons[room.id];
+                            const Icon = roomIcons[room.name];
 
                             return (
                                 <Link
@@ -96,7 +77,7 @@ function HomePage() {
 
                 {/* Outdoor is outside the house */}
                 {rooms
-                    .filter((room) => room.id === 7)
+                    .filter((room) => room.slug === 'outdoor')
                     .map((room) => (
                         <Link
                             key={room.id}

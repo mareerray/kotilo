@@ -109,8 +109,8 @@ function PhotoAnnotator({ annotations, onChange, children }: PhotoAnnotatorProps
                 
             </div>
 
-            {start && !end && <p className="field-note">Now tap the second point.</p>}
-            {!start && <p className="field-note">Tap the photo to place the first point.</p>}
+            {start && !end && <p className="field-note-tap">Now tap the second point and add a label and value.</p>}
+            {!start && <p className="field-note-tap">To add measurement, tap the image to place the first point.</p>}
 
             {start && end && (
                 <div className="annotation-form">
