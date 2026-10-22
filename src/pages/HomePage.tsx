@@ -9,9 +9,6 @@ import {
     CookingPot,
     Bath,
     Sprout,
-    PlantPot,
-    Rose,
-    Birdhouse,
 } from 'lucide-react';
 
 import type { LucideIcon } from 'lucide-react';
@@ -106,29 +103,43 @@ function HomePage() {
                             to={`/rooms/${room.id}`}
                             className="house-garden"
                         >
+                            {/* Cute garden decorations */}
+                            <span className="garden-birdhouse" aria-hidden="true">
+                                <span className="garden-birdhouse__hole" />
+                            </span>
 
-                            <PlantPot
-                                size={28}
-                                strokeWidth={1.5}
-                                aria-hidden="true"
-                            />
-                            <Sprout
-                                size={28}
-                                strokeWidth={1.5}
-                                aria-hidden="true"
-                            />
+                            <span className="garden-planter garden-planter--left" aria-hidden="true">
+                                <span className="garden-planter__flowers" />
+                            </span>
+
+                            <span className="garden-planter garden-planter--right" aria-hidden="true">
+                                <span className="garden-planter__flowers" />
+                            </span>
+
+                            <span className="garden-flower garden-flower--pink" aria-hidden="true" />
+                            <span className="garden-flower garden-flower--yellow" aria-hidden="true" />
+                            <span className="garden-flower garden-flower--blue" aria-hidden="true" />
+                            <span className="garden-flower garden-flower--white" aria-hidden="true" />
+                            {/* Garden path */}
+                            <span className="garden-path" aria-hidden="true">
+                                <span className="garden-path__stone garden-path__stone--1" />
+                                <span className="garden-path__stone garden-path__stone--2" />
+                                <span className="garden-path__stone garden-path__stone--3" />
+                            </span>
+
+                            {/* Watering can */}
+                            <span className="garden-watering-can" aria-hidden="true">
+                                <span className="garden-watering-can__spout" />
+                            </span>
+
+                            {/* Butterfly */}
+                            <span className="garden-butterfly" aria-hidden="true"> <span /> </span>
+                            <span className="garden-butterfly garden-butterfly--blue" aria-hidden="true">
+                                <span />
+                            </span>
                             <span>{room.name}</span>
-                            <Rose
-                                size={28}
-                                strokeWidth={1.5}
-                                aria-hidden="true"
-                            />
-                            <Birdhouse
-                                size={28}
-                                strokeWidth={1.5}
-                                aria-hidden="true"
-                            />
                         </Link>
+
                     ))}
 
                 {/* Decorative plants beside the house */}
