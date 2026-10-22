@@ -130,7 +130,18 @@ function HomePage() {
                             />
                         </Link>
                     ))}
-            </div>            <Link className="home-inventory-link" to="/inventory">
+
+                {/* Decorative plants beside the house */}
+                <div className="house-plants" aria-hidden="true">
+                    <span className="house-bush house-bush--left" />
+
+                    <div className="house-tree-group">
+                        <span className="house-tree" />
+                        <span className="house-bush house-bush--right-front" />
+                    </div>
+                </div>
+            </div>
+            <Link className="home-inventory-link" to="/inventory">
                 View all belongings →
             </Link>
         </section>
