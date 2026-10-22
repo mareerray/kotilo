@@ -662,7 +662,7 @@
 }
 
 /* Mobile view: smaller, faster sky animation */
-@media (max-width: 770px) {
+@media (max-width: 670px) {
     .house-sky {
         top: 20%;
         height: 100px;
@@ -791,7 +791,7 @@
 
 @media (max-width: 380px){
     .house-sky {
-        top: 24%;
+        top: 28%;
         height: 100px;
     }
 }
