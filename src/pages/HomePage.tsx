@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import { rooms } from '../data/rooms';
 import { roomIcons } from '../data/roomIcons';
+import HouseGreenery from '../components/HouseGreenery';
+import './sky.css';
 import './home.css';
+import './garden.css';
+import './greenery.css';
+
 
 function HomePage() {
     return (
@@ -23,7 +28,7 @@ function HomePage() {
                 <span className="bird bird-3 bird-icon">🕊️</span>
             </div>
             <div className="home-house">
-    
+                <HouseGreenery />
 
                 {/* Decorative roof */}
                 <div className="house-roof-area" aria-hidden="true">

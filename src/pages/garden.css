@@ -1,0 +1,492 @@
+/* -----------  Cute garden decorations -------------- */
+
+.garden-birdhouse {
+    position: absolute;
+    top: 24px;
+    left: 18px;
+    width: 30px;
+    height: 34px;
+    background: #b98a63;
+    border: 2px solid #82624a;
+    border-radius: 4px 4px 6px 6px;
+    box-shadow: 0 3px 6px rgb(52 72 61 / 18%);
+}
+
+/* Birdhouse roof */
+.garden-birdhouse::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: -5px;
+    width: 36px;
+    height: 14px;
+    background: #7c5c44;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/* Round entrance */
+.garden-birdhouse__hole {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4a372b;
+    box-shadow: inset 0 2px 3px rgb(0 0 0 / 25%);
+}
+
+/* Birdhouse pole */
+.garden-birdhouse::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 26px;
+    border-radius: 2px;
+    background:
+        repeating-linear-gradient(to right,
+            transparent 0 1px,
+            rgb(52 72 61 / 18%) 1px 2px),
+        #82624a;
+    box-shadow: 0 2px 4px rgb(52 72 61 / 18%);
+}
+
+/* Flower planters */
+.garden-planter {
+    position: absolute;
+    bottom: 12px;
+    width: 46px;
+    height: 24px;
+    border: 2px solid #82624a;
+    border-radius: 4px 4px 8px 8px;
+    background:
+        repeating-linear-gradient(to right,
+            transparent 0 6px,
+            rgb(52 72 61 / 12%) 6px 7px),
+        #c19a6f;
+    box-shadow: 0 3px 6px rgb(52 72 61 / 16%);
+}
+
+.garden-planter--left {
+    left: 58px;
+}
+
+.garden-planter--right {
+    right: 20px;
+}
+
+/* Flowers growing from the planters */
+.garden-planter__flowers {
+    position: absolute;
+    top: -19px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 23px;
+
+    background:
+        /* Golden centers — drawn above the petals */
+        radial-gradient(
+            circle at 20% 65%,
+            #b98232 0 1.5px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 50% 65%,
+            #b98232 0 1.5px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 80% 65%,
+            #b98232 0 1.5px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 35% 32%,
+            #b98232 0 1.5px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 65% 32%,
+            #b98232 0 1.5px,
+            transparent 2px
+        ),
+        /* Front pink flower */
+        radial-gradient(
+            ellipse 3px 6px at 20% 65%,
+            #e2a7b5 95%, transparent
+        ),
+        radial-gradient(
+            ellipse 6px 3px at 20% 65%,
+            #e2a7b5 95%, transparent
+        ),
+
+        /* Front golden flower */
+        radial-gradient(
+            ellipse 3px 6px at 50% 65%,
+            #f0cf7d 95%, transparent
+        ),
+        radial-gradient(
+            ellipse 6px 3px at 50% 65%,
+            #f0cf7d 95%, transparent
+        ),
+
+        /* Front blue flower */
+        radial-gradient(
+            ellipse 3px 6px at 80% 65%,
+            #c9d8ef 95%, transparent
+        ),
+        radial-gradient(
+            ellipse 6px 3px at 80% 65%,
+            #c9d8ef 95%, transparent
+        ),
+
+        /* Cream flower tucked behind */
+        radial-gradient(
+            ellipse 3px 5.5px at 35% 32%,
+            #f4f1e4 95%, transparent
+        ),
+        radial-gradient(
+            ellipse 5.5px 3px at 35% 32%,
+            #f4f1e4 95%, transparent
+        ),
+
+        /* Pink flower tucked behind */
+        radial-gradient(
+            ellipse 3px 5.5px at 65% 32%,
+            #e2a7b5 95%, transparent
+        ),
+        radial-gradient(
+            ellipse 5.5px 3px at 65% 32%,
+            #e2a7b5 95%, transparent
+        );
+}
+
+/* Small flowers on the grass */
+.garden-flower {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgb(255 255 255 / 30%);
+    pointer-events: none;
+}
+
+.garden-flower::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 9px;
+    background: #5f7f66;
+}
+
+.garden-flower--pink {
+    top: 30px;
+    left: 40%;
+    background: #e2a7b5;
+}
+
+.garden-flower--yellow {
+    top: 46px;
+    left: 62%;
+    background: #f0cf7d;
+}
+
+.garden-flower--blue {
+    bottom: 34px;
+    left: 30%;
+    background: #c9d8ef;
+}
+
+.garden-flower--white {
+    bottom: 22px;
+    right: 32%;
+    background: #f7f4e8;
+}
+
+.garden-birdhouse,
+.garden-planter,
+.garden-planter__flowers,
+.garden-flower {
+    pointer-events: none;
+}
+
+/* Stepping-stone path */
+.garden-path {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 34px;
+    pointer-events: none;
+}
+
+.garden-path__stone {
+    position: absolute;
+    width: 32px;
+    height: 10px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, rgb(255 255 255 / 35%), transparent 60%),
+        #d9cdb6;
+    box-shadow: 0 2px 3px rgb(52 72 61 / 16%);
+}
+
+.garden-path__stone--1 {
+    bottom: 0px;
+    left: -8px;
+}
+
+.garden-path__stone--2 {
+    bottom: 30px;
+    left: 22px;
+    transform: scale(0.9);
+}
+
+.garden-path__stone--3 {
+    bottom: 60px;
+    left: 56px;
+    transform: scale(0.8);
+}
+
+/* Butterfly */
+.garden-butterfly {
+    position: absolute;
+    top: 24px;
+    right: 34%;
+    width: 22px;
+    height: 16px;
+    pointer-events: none;
+    animation: butterfly-float 7s ease-in-out infinite;
+}
+
+/* Left and right wings */
+.garden-butterfly::before,
+.garden-butterfly::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 14px;
+    background:
+        radial-gradient(circle at 50% 25%, #f7d7de 0 3px, transparent 4px),
+        #e2a7b5;
+    border-radius: 70% 70% 45% 45%;
+    box-shadow: inset 0 -2px 0 rgb(52 72 61 / 12%);
+}
+
+.garden-butterfly::before {
+    left: 0;
+    transform: rotate(-12deg);
+    transform-origin: right center;
+}
+
+.garden-butterfly::after {
+    right: 0;
+    transform: rotate(12deg);
+    transform-origin: left center;
+}
+
+/* Butterfly body */
+.garden-butterfly span {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 11px;
+    border-radius: 3px;
+    background: #4a372b;
+}
+
+/* Blue butterfly */
+.garden-butterfly--blue {
+    top: 34px;
+    right: 22%;
+    animation-duration: 9s;
+    animation-delay: -2s;
+    transform: scale(0.9);
+}
+
+.garden-butterfly--blue::before,
+.garden-butterfly--blue::after {
+    background:
+        radial-gradient(circle at 50% 25%, #dbeafe 0 3px, transparent 4px),
+        #a7c4e2;
+    box-shadow: inset 0 -2px 0 rgb(52 72 61 / 12%);
+}
+
+@keyframes butterfly-float {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(-3deg);
+    }
+
+    25% {
+        transform: translate(5px, -7px) rotate(3deg);
+    }
+
+    50% {
+        transform: translate(10px, -2px) rotate(-2deg);
+    }
+
+    75% {
+        transform: translate(4px, 4px) rotate(2deg);
+    }
+}
+
+/* Watering can */
+.garden-watering-can {
+    position: absolute;
+    bottom: 14px;
+    right: 70px;
+    width: 32px;
+    height: 26px;
+    border: 2px solid #5f7f66;
+    border-radius: 6px 8px 8px 6px;
+    background:
+        linear-gradient(135deg, rgb(255 255 255 / 25%), transparent 55%),
+        #a8c3b0;
+    box-shadow: 0 3px 6px rgb(52 72 61 / 16%);
+    pointer-events: none;
+}
+
+/* Curved handle on top */
+.garden-watering-can::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 7px;
+    width: 16px;
+    height: 14px;
+    border: 2px solid #5f7f66;
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    background: transparent;
+}
+
+/* Angled spout */
+.garden-watering-can::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: -14px;
+    width: 18px;
+    height: 6px;
+    border-radius: 3px;
+    background: #5f7f66;
+    transform: rotate(-28deg);
+}
+
+@media (max-width: 600px) {
+    .garden-birdhouse {
+        width: 24px;
+        height: 28px;
+        top: 30px;
+        left: 14px;
+    }
+
+    .garden-birdhouse::before {
+        width: 30px;
+        height: 11px;
+        top: -10px;
+        left: -4px;
+    }
+
+    .garden-birdhouse__hole {
+        width: 8px;
+        height: 8px;
+        top: 8px;
+    }
+
+    .garden-planter {
+        width: 50px;
+        height: 20px;
+    }
+
+    .garden-planter--left {
+        left: 44px;
+    }
+
+    .garden-planter--right {
+        right: 14px;
+    }
+
+    .garden-planter__flowers {
+        width: 38px;
+        height: 23px;
+        top: -19px;
+    }
+
+    .garden-flower {
+        width: 8px;
+        height: 8px;
+    }
+
+    .garden-birdhouse::after {
+        height: 20px;
+        width: 4px;
+    }
+
+    .garden-path {
+        width: 200px;
+        height: 28px;
+    }
+
+    .garden-butterfly {
+        width: 18px;
+        height: 13px;
+        top: 22px;
+        right: 30%;
+    }
+
+    .garden-butterfly::before,
+    .garden-butterfly::after {
+        width: 8px;
+        height: 11px;
+    }
+
+    .garden-butterfly span {
+        height: 9px;
+    }
+
+    .garden-butterfly--blue {
+        top: 38px;
+        right: 18%;
+    }
+
+    .garden-watering-can {
+        width: 26px;
+        height: 21px;
+        right: 54px;
+        bottom: 12px;
+    }
+
+    .garden-watering-can::before {
+        width: 13px;
+        height: 11px;
+        top: -10px;
+        left: 6px;
+    }
+
+    .garden-watering-can::after {
+        width: 14px;
+        left: -12px;
+    }
+
+    .garden-watering-can .garden-watering-can__spout {
+        width: 7px;
+        height: 7px;
+        top: -3px;
+        left: -17px;
+    }
+}
