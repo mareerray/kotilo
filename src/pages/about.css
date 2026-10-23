@@ -1,0 +1,174 @@
+/*------------------ About page ------------------*/
+.about-kotilo {
+    position: relative;                 /* the veil needs this */
+    margin-top: 40px;
+    padding: 28px;
+    /* border: 1px solid #f5e1ec; */
+    border-radius: var(--radius);
+    background-color: var(--card);
+    background-image: url('/wallpaper-about.svg');
+    background-repeat: repeat;
+}
+
+/* Soft veil so text stays readable */
+.about-kotilo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: #f7f0e08c;
+    pointer-events: none;
+}
+
+/* Everything inside sits above the veil */
+.about-kotilo > * {
+    position: relative;
+    z-index: 1;
+}
+
+.about-kotilo h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.about-kotilo__intro {
+    max-width: 65ch;
+    margin: 0;
+    color: #746a80;
+    line-height: 1.7;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.about-features h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.about-features p {
+    margin: 0;
+    color: #746a80;
+    line-height: 1.7;
+}
+
+.about-features__card {
+    padding: 16px;
+    border-radius: var(--radius);
+    background: #f7f0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    animation: fade-up 0.7s ease-out backwards;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-features__card:nth-child(1) { animation-delay: 0.1s; }
+.about-features__card:nth-child(2) { animation-delay: 0.3s; }
+.about-features__card:nth-child(3) { animation-delay: 0.5s; }
+
+/*------------------ Cozy scene ------------------*/
+.cozy-scene {
+    display: block;
+    width: 100%;
+    max-width: 540px;
+    height: auto;
+    margin: 0 auto 1.5rem;
+}
+
+.flame,
+.plant,
+.steam {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+}
+
+.trail {
+    transform-box: fill-box;
+    transform-origin: center top;
+}
+
+.flame { animation: flicker 1.6s ease-in-out infinite; }
+
+.plant,
+.trail { animation: sway 4s ease-in-out infinite alternate; }
+
+.steam { opacity: 0; animation: rise 3s ease-out infinite; }
+.steam--2 { animation-delay: 1s; }
+.steam--3 { animation-delay: 2s; }
+
+/*------------------ Keyframes ------------------*/
+@keyframes flicker {
+    0%, 100% { transform: scale(1, 1); }
+    30%      { transform: scale(0.92, 1.12); }
+    60%      { transform: scale(1.05, 0.94); }
+}
+
+@keyframes rise {
+    0%   { opacity: 0;   transform: translateY(6px); }
+    40%  { opacity: 0.8; }
+    100% { opacity: 0;   transform: translateY(-12px); }
+}
+
+@keyframes sway {
+    from { transform: rotate(-3deg); }
+    to   { transform: rotate(3deg); }
+}
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/*------------------ Hover (mouse only) ------------------*/
+@media (hover: hover) {
+    .about-features__card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(199, 162, 122, 0.25);
+    }
+}
+
+/*------------------ Tablet ------------------*/
+@media (max-width: 900px) {
+    .about-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/*------------------ Mobile ------------------*/
+@media (max-width: 600px) {
+    .about-kotilo {
+        margin-top: 24px;
+        padding: 18px 14px;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 18px;
+    }
+
+    .about-kotilo__intro,
+    .about-features p {
+        line-height: 1.6;
+    }
+
+    .cozy-scene {
+        margin-bottom: 1rem;
+    }
+}
+
+/*------------------ Reduced motion ------------------*/
+@media (prefers-reduced-motion: reduce) {
+    .flame,
+    .plant,
+    .trail,
+    .steam,
+    .about-features__card {
+        animation: none;
+    }
+
+    .steam { opacity: 0.6; }
+}
