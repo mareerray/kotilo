@@ -81,45 +81,6 @@
     font-size: 1.3rem;
 }
 
-/* ------------- About Page  ------------- */
-.about-kotilo {
-    margin-top: 40px;
-    padding: 28px;
-    border: 1px solid #f5e1ec;
-    border-radius: var(--radius);
-    background: var(--card);
-}
-
-.about-kotilo h2 {
-    margin: 0 0 12px;
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-}
-
-.about-kotilo__intro {
-    max-width: 65ch;
-    margin: 0;
-    color: #746a80;
-    line-height: 1.7;
-}
-
-.about-features {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-}
-
-.about-features h3 {
-    margin: 0 0 8px;
-    font-size: 1rem;
-}
-
-.about-features p {
-    margin: 0;
-    color: #746a80;
-    line-height: 1.7;
-}
-
 /* ------------ Footer ------------ */
 .site-footer {
     display: flex;

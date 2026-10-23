@@ -9,7 +9,7 @@ import { supabase } from './lib/supabase';
 import { updateAnnotations } from './lib/itemsApi';
 
 import AppHeader from './components/AppHeader';
-import AboutKotilo from './components/AboutKotilo';
+import AboutKotilo from './pages/AboutKotilo';
 import AppFooter from './components/AppFooter';
 
 import HomePage from './pages/HomePage';
