@@ -210,6 +210,7 @@
     pointer-events: none;
 }
 
+
 /* Room icons and names */
 .home-room__name {
     font-size: 1rem;
@@ -229,8 +230,21 @@
 
 /* Room interaction */
 
-.home-room:hover {
-    box-shadow: inset 0 0 0 3px var(--home-green);
+/* Room interaction */
+.home-room {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+    .home-room:hover {
+        box-shadow: inset 0 0 0 3px var(--home-green);
+    }
+}
+
+/* Tap feedback on phones */
+.home-room:active {
+    transform: scale(0.97);
 }
 
 .home-room:focus-visible {
@@ -439,13 +453,32 @@
 /* Inventory link */
 
 .home-inventory-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    min-height: 48px;
-    margin-top: 20px;
+    justify-content: center;
+    gap: 8px;
+
+    width: fit-content;
+    min-height: 44px;
+    max-width: 100%;
+    margin: 12px auto 0;
+    padding: 0 8px;
+    box-sizing: border-box;
+
+    border: 0;
+    background: transparent;
     color: var(--home-ink);
-    font-weight: 700;
+
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
     text-underline-offset: 4px;
+}
+
+.home-inventory-link:focus-visible {
+    outline: 3px solid var(--home-ink);
+    outline-offset: 4px;
+    border-radius: 6px;
 }
 
 /* Mobile */
@@ -540,15 +573,6 @@
     background: #c9d8ef;
 }
 
-/* Reduced motion */
-
-@media (prefers-reduced-motion: reduce) {
-    .chimney-smoke {
-        animation: none;
-        opacity: 0;
-    }
-}
-
 /* Warm light glowing through the windows */
 .room-window,
 .house-roof__window {
@@ -556,6 +580,53 @@
         inset 0 0 8px rgb(255 246 210 / 85%),
         0 0 10px 2px rgb(255 222 150 / 35%),
         0 0 24px 6px rgb(255 222 150 / 18%);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Brighter glow: mouse hover, keyboard focus, or finger press */
+.home-room:focus-visible .room-window,
+.home-room:active .room-window {
+    box-shadow:
+        inset 0 0 10px rgb(255 250 225 / 100%),
+        0 0 14px 4px rgb(255 214 120 / 90%),
+        0 0 34px 12px rgb(255 214 120 / 55%);
+}
+
+@media (hover: hover) {
+    .home-room:hover .room-window {
+        box-shadow:
+            inset 0 0 10px rgb(255 250 225 / 100%),
+            0 0 14px 4px rgb(255 214 120 / 90%),
+            0 0 34px 12px rgb(255 214 120 / 55%);
+    }
+}
+
+/* Touch screens: windows breathe slowly, one room after another */
+@media (hover: none) {
+    .room-window {
+        animation: window-glow 4s ease-in-out infinite;
+    }
+    .home-room--bedroom .room-window     { animation-delay: 0s; }
+    .home-room--bathroom .room-window    { animation-delay: 0.6s; }
+    .home-room--living-room .room-window { animation-delay: 1.2s; }
+    .home-room--kitchen .room-window     { animation-delay: 1.8s; }
+    .home-room--hallway .room-window     { animation-delay: 2.4s; }
+    .home-room--office .room-window      { animation-delay: 3s; }
+}
+
+@keyframes window-glow {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 8px rgb(255 246 210 / 85%),
+            0 0 10px 2px rgb(255 222 150 / 35%),
+            0 0 24px 6px rgb(255 222 150 / 18%);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 10px rgb(255 250 225 / 100%),
+            0 0 14px 4px rgb(255 214 120 / 90%),
+            0 0 34px 12px rgb(255 214 120 / 55%);
+    }
 }
 
 /* Soft outdoor scene */
@@ -567,7 +638,7 @@
     height: 130px;
     pointer-events: none;
     overflow: hidden;
-    z-index: 0;
+    z-index: 5;
 }
 
 .cloud {
@@ -1410,3 +1481,14 @@
     }
 }
 
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .chimney-smoke {
+        animation: none;
+        opacity: 0;
+    }
+    .room-window {
+        animation: none;
+    }
+}
