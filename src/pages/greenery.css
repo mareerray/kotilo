@@ -1,0 +1,347 @@
+/*------------------ Woodland surroundings ------------------*/
+
+.home-house {
+    position: relative;
+    isolation: isolate;
+}
+
+.house-greenery {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.house-greenery__side {
+    position: absolute;
+    bottom: 40px;
+    display: block;
+    width: 180px;
+    height: auto;
+    overflow: visible;
+}
+
+.house-greenery__side--left {
+    left: -100px;
+}
+
+.house-greenery__side--right {
+    right: -95px;
+    width: 165px;
+    transform: scaleX(-1);
+}
+
+/* Keep the foliage tucked behind the house on phones */
+/* Keep the greenery within the mobile scene */
+@media (max-width: 600px) {
+    .house-greenery__side {
+        bottom: 45px;
+        width: 100px;
+    }
+
+    .house-greenery__side--left {
+        left: -8px;
+    }
+
+    .house-greenery__side--right {
+        right: -8px;
+        width: 95px;
+    }
+}
+
+/* ------------- Plants beside the house--------------- */
+
+.house-plants {
+    position: relative;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Big bush on the left wall */
+.house-bush--left {
+    position: absolute;
+    left: -50px;
+    bottom: 80px;
+    width: 140px;
+    height: 110px;
+    background:
+        radial-gradient(circle at 30% 30%, rgb(255 255 255 / 18%), transparent 55%),
+        #6f8f77;
+    box-shadow:
+        inset -8px -10px 0 rgb(52 72 61 / 12%),
+        0 6px 12px rgb(52 72 61 / 12%);
+        border-radius: 0;
+
+    clip-path: polygon(
+        3% 80%, 0% 65%, 5% 51%,
+        13% 46%, 12% 32%, 20% 20%,
+        31% 19%, 37% 7%, 49% 3%,
+        60% 10%, 65% 21%, 77% 17%,
+        88% 26%, 89% 39%, 97% 48%,
+        100% 64%, 96% 80%, 85% 92%,
+        66% 98%, 25% 98%, 11% 92%
+    );
+}
+
+/* Big tree on the right wall */
+.house-tree-group {
+    position: absolute;
+    right: -66px;
+    bottom: 140px;
+    width: 150px;
+    height: 230px;
+    isolation: isolate;
+}
+
+.house-tree-group::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -42px;
+    transform: translateX(-50%);
+
+    width: 16px;
+    height: 90px;
+    border-radius: 5px 5px 3px 3px;
+
+    background:
+        repeating-linear-gradient(
+            to right,
+            transparent 0 3px,
+            rgb(52 72 61 / 18%) 3px 4px
+        ),
+        #7a6553;
+
+    box-shadow: inset 2px 0 0 rgb(255 255 255 / 12%);
+    z-index: -1;
+}
+
+.house-tree {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 150px;
+    background:
+        radial-gradient(circle at 32% 28%, rgb(255 255 255 / 20%), transparent 55%),
+        #5f8168;
+    box-shadow:
+        inset -10px -12px 0 rgb(52 72 61 / 14%),
+        0 8px 16px rgb(52 72 61 / 14%);
+    border-radius: 0;
+
+    clip-path: polygon(
+        47% 0%, 60% 3%, 68% 12%,
+        79% 10%, 89% 20%, 88% 32%,
+        97% 41%, 100% 55%, 94% 65%,
+        96% 77%, 87% 88%, 74% 91%,
+        64% 99%, 48% 97%, 36% 100%,
+        22% 92%, 11% 89%, 5% 77%,
+        8% 65%, 0% 53%, 5% 39%,
+        13% 32%, 12% 21%, 24% 12%,
+        35% 13%, 38% 4%
+    );
+}
+
+/* Tree trunk */
+.house-tree::after {
+    content: none;
+}
+
+/* Small bush partly covering the front-right of the house */
+.house-bush--right-front {
+    position: absolute;
+    right: -10px;
+    bottom: -74px;
+    width: 96px;
+    height: 76px;
+    background:
+        radial-gradient(circle at 30% 30%, rgb(255 255 255 / 16%), transparent 55%),
+        #7f9d86;
+    box-shadow:
+        inset -6px -8px 0 rgb(52 72 61 / 12%),
+        0 5px 10px rgb(52 72 61 / 12%);
+    border-radius: 0;
+
+    clip-path: polygon(
+        4% 82%, 0% 65%, 7% 48%,
+        18% 43%, 19% 26%, 32% 15%,
+        43% 19%, 51% 5%, 65% 3%,
+        77% 15%, 78% 29%, 90% 34%,
+        97% 48%, 95% 60%, 100% 72%,
+        91% 90%, 76% 98%, 24% 98%,
+        12% 93%
+    );
+}
+
+@media (max-width: 600px) {
+    .house-bush--left {
+        left: -14px;
+        bottom: 80px;
+        transform: scale(0.6);
+        transform-origin: bottom left;
+    }
+
+    .house-tree-group {
+        right: -6px;
+        bottom: 110px;
+        transform: scale(0.6);
+        transform-origin: bottom right;
+    }
+
+    .house-bush--right-front {
+        right: -6px;
+        bottom: -55px;
+    }
+}
+
+/* Leafy texture: big left bush */
+.house-bush--left {
+    background:
+        radial-gradient(circle at 22% 28%, rgb(255 255 255 / 22%) 0 7px, transparent 8px),
+        radial-gradient(circle at 48% 18%, rgb(255 255 255 / 16%) 0 6px, transparent 7px),
+        radial-gradient(circle at 72% 32%, rgb(255 255 255 / 18%) 0 6px, transparent 7px),
+        radial-gradient(circle at 34% 58%, rgb(52 72 61 / 20%) 0 8px, transparent 9px),
+        radial-gradient(circle at 64% 66%, rgb(52 72 61 / 18%) 0 7px, transparent 8px),
+        radial-gradient(circle at 82% 54%, rgb(52 72 61 / 16%) 0 6px, transparent 7px),
+        radial-gradient(circle at 30% 30%, rgb(255 255 255 / 18%), transparent 55%),
+        #6f8f77;
+}
+
+/* Leafy texture: tree crown */
+.house-tree {
+    background:
+        radial-gradient(circle at 24% 24%, rgb(255 255 255 / 24%) 0 8px, transparent 9px),
+        radial-gradient(circle at 52% 16%, rgb(255 255 255 / 18%) 0 7px, transparent 8px),
+        radial-gradient(circle at 76% 30%, rgb(255 255 255 / 20%) 0 7px, transparent 8px),
+        radial-gradient(circle at 34% 60%, rgb(52 72 61 / 22%) 0 9px, transparent 10px),
+        radial-gradient(circle at 66% 70%, rgb(52 72 61 / 20%) 0 8px, transparent 9px),
+        radial-gradient(circle at 84% 58%, rgb(52 72 61 / 18%) 0 7px, transparent 8px),
+        radial-gradient(circle at 32% 28%, rgb(255 255 255 / 20%), transparent 55%),
+        #5f8168;
+}
+
+/* Leafy texture: small right-front bush */
+.house-bush--right-front {
+    background:
+        radial-gradient(circle at 26% 30%, rgb(255 255 255 / 20%) 0 6px, transparent 7px),
+        radial-gradient(circle at 54% 20%, rgb(255 255 255 / 16%) 0 5px, transparent 6px),
+        radial-gradient(circle at 74% 38%, rgb(255 255 255 / 18%) 0 5px, transparent 6px),
+        radial-gradient(circle at 36% 62%, rgb(52 72 61 / 20%) 0 7px, transparent 8px),
+        radial-gradient(circle at 68% 70%, rgb(52 72 61 / 18%) 0 6px, transparent 7px),
+        radial-gradient(circle at 30% 30%, rgb(255 255 255 / 16%), transparent 55%),
+        #7f9d86;
+}
+
+/* Small berries */
+.house-bush--left::before,
+.house-bush--right-front::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        /* First cluster */
+        radial-gradient(
+            circle at 34% 43%,
+            #a85468 0 3px,
+            transparent 3.5px
+        ),
+        radial-gradient(
+            circle at 40% 46%,
+            #b9687c 0 3px,
+            transparent 3.5px
+        ),
+        radial-gradient(
+            circle at 36% 51%,
+            #97495e 0 3px,
+            transparent 3.5px
+        ),
+
+        /* Second cluster */
+        radial-gradient(
+            circle at 68% 65%,
+            #a85468 0 2.5px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 74% 68%,
+            #b9687c 0 2.5px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 69% 73%,
+            #97495e 0 2.5px,
+            transparent 3px
+        );
+}
+
+/* Flowers among the berries */
+.house-bush--left::after,
+.house-bush--right-front::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        /* Cream flower: golden center, then petals */
+        radial-gradient(
+            circle at 25% 65%,
+            #d6aa54 0 2px,
+            transparent 2.5px
+        ),
+        radial-gradient(
+            ellipse 2px 3px at 25% 60%,
+            #fff3d9 98%, transparent
+        ),
+        radial-gradient(
+            ellipse 2px 3px at 25% 70%,
+            #fff3d9 98%, transparent
+        ),
+        radial-gradient(
+            ellipse 3px 2px at 21% 65%,
+            #fff3d9 98%, transparent
+        ),
+        radial-gradient(
+            ellipse 3px 2px at 29% 65%,
+            #fff3d9 98%, transparent
+        ),
+
+        /* Pink flower */
+        radial-gradient(
+            circle at 61% 38%,
+            #edce83 0 2px,
+            transparent 2.5px
+        ),
+        radial-gradient(
+            ellipse 2px 3px at 61% 33%,
+            #e8b9c2 98%, transparent
+        ),
+        radial-gradient(
+            ellipse 2px 3px at 61% 43%,
+            #e8b9c2 98%, transparent
+        ),
+        radial-gradient(
+            ellipse 3px 2px at 57% 38%,
+            #e8b9c2 98%, transparent
+        ),
+        radial-gradient(
+            ellipse 3px 2px at 65% 38%,
+            #e8b9c2 98%, transparent
+        ),
+
+        /* Tiny cream blossoms */
+        radial-gradient(
+            circle at 48% 76%,
+            #fff3d9 0 2px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle at 81% 48%,
+            #fff3d9 0 2.5px,
+            transparent 3px
+        );
+}

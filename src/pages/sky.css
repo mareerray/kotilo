@@ -1,0 +1,289 @@
+/* ------------- Soft outdoor scene ----------------*/
+
+.house-sky {
+    position: absolute;
+    bottom: 60%;
+    left: 0;
+    right: 0;
+    height: 150px;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.cloud {
+    position: absolute;
+    width: 134px;
+    height: 32px;
+    border-radius: 999px;
+    background: var(--clouds, #f9e5e5);
+    box-shadow: 0 6px 10px rgb(52 72 61 / 24%);
+    animation: drift 55s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: inherit;
+}
+
+.cloud::before {
+    width: 58px;
+    height: 58px;
+    top: -36px;
+    left: 20px;
+}
+
+.cloud::after {
+    width: 42px;
+    height: 42px;
+    top: -22px;
+    right: 20px;
+}
+
+.cloud-1 {
+    top: 58px;
+    left: -400px;
+}
+
+.cloud-2 {
+    top: 70px;
+    left: -180px;
+    scale: 0.72;
+    animation-delay: -9s;
+}
+
+.cloud-3 {
+    top: 42px;
+    left: -240px;
+    transform: scale(0.55);
+    animation-delay: -17s;
+}
+
+.cloud-4 {
+    top: 90px;
+    left: -300px;
+    transform: scale(0.8);
+    animation-delay: -8s;
+}
+
+.cloud-5 {
+    top: 36px;
+    left: -360px;
+    transform: scale(0.62);
+    animation-delay: -38s;
+}
+
+
+@keyframes drift {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(calc(100vw + 650px), 0, 0);
+    }
+}
+
+.bird {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.65;
+    animation: fly-across 34s linear infinite;
+}
+
+.bird-icon {
+    display: inline-block;
+    transform: scaleX(-1);
+}
+
+.bird-1 {
+    animation-duration: 32s;
+}
+
+.bird-2 {
+    animation-duration: 38s;
+}
+
+.bird-3 {
+    animation-duration: 44s;
+}
+
+.bird-1 {
+    top: 70px;
+    left: -40px;
+}
+
+.bird-2 {
+    top: 94px;
+    left: -90px;
+    font-size: 0.9rem;
+    animation-delay: -6s;
+}
+
+.bird-3 {
+    top: 58px;
+    left: -130px;
+    font-size: 1.25rem;
+    animation-delay: -12s;
+}
+
+@keyframes fly-across {
+    from {
+        transform: translateX(0) translateY(0) scaleX(-1);
+    }
+
+    25% {
+        transform: translateX(28vw) translateY(-8px) scaleX(-1);
+    }
+
+    50% {
+        transform: translateX(55vw) translateY(6px) scaleX(-1);
+    }
+
+    75% {
+        transform: translateX(80vw) translateY(-5px) scaleX(-1);
+    }
+
+    to {
+        transform: translateX(110vw) translateY(0) scaleX(-1);
+    }
+}
+
+/* ----------  Mobile view: smaller, faster sky animation ----------*/
+@media (max-width: 600px) {
+    .house-sky {
+        top: 26%;
+        height: 100px;
+    }
+
+    .cloud {
+        width: 80px;
+        height: 25px;
+        animation-duration: 20s;
+    }
+
+    .cloud::before {
+        width: 30px;
+        height: 30px;
+        top: -18px;
+        left: 16px;
+    }
+
+    .cloud::after {
+        width: 21px;
+        height: 21px;
+        top: -9px;
+        right: 15px;
+    }
+
+    .cloud-1,
+    .cloud-2,
+    .cloud-3,
+    .cloud-4,
+    .cloud-5 {
+        left: -120px;
+    }
+
+    .cloud-1 {
+        top: 36px;
+        animation-delay: 0s;
+    }
+
+    .cloud-2 {
+        top: 50px;
+        scale: 0.72;
+        animation-delay: -6s;
+    }
+
+    .cloud-3 {
+        top: 40px;
+        scale: 0.55;
+        animation-delay: -12s;
+    }
+
+    .cloud-4 {
+        top: 68px;
+        scale: 0.8;
+        animation-delay: -19s;
+    }
+
+    .cloud-5 {
+        top: 18px;
+        scale: 0.62;
+        animation-delay: -24s;
+    }
+
+    @keyframes drift {
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+
+        to {
+            transform: translate3d(calc(100vw / 0.72 + 240px), 0, 0);
+        }
+    }
+
+    .bird {
+        font-size: 1rem;
+        animation-duration: 14s;
+    }
+
+    .bird-1,
+    .bird-2,
+    .bird-3 {
+        left: -40px;
+    }
+
+    .bird-1 {
+        top: 48px;
+        animation-duration: 12s;
+        animation-delay: 0s;
+    }
+
+    .bird-2 {
+        top: 64px;
+        font-size: 0.85rem;
+        animation-duration: 16s;
+        animation-delay: -4s;
+    }
+
+    .bird-3 {
+        top: 40px;
+        font-size: 0.75rem;
+        animation-duration: 18s;
+        animation-delay: -8s;
+    }
+
+    @keyframes fly-across {
+        from {
+            transform: translate3d(0, 0, 0) scaleX(-1);
+        }
+
+        25% {
+            transform: translate3d(calc((100vw + 80px) * 0.25), -8px, 0) scaleX(-1);
+        }
+
+        50% {
+            transform: translate3d(calc((100vw + 80px) * 0.5), 6px, 0) scaleX(-1);
+        }
+
+        75% {
+            transform: translate3d(calc((100vw + 80px) * 0.75), -5px, 0) scaleX(-1);
+        }
+
+        to {
+            transform: translate3d(calc(100vw + 80px), 0, 0) scaleX(-1);
+        }
+    }
+}
+
+/* OnePlus Nord CE4 Lite has viewport size approx.  356 x 695 Pixels */
+@media (max-width: 375px) {
+    .house-sky {
+        top: 26%;
+        height: 100px;
+    }
+}
