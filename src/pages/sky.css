@@ -177,25 +177,25 @@
 
     .cloud-2 {
         top: 50px;
-        scale: 0.72;
+        /* scale: 0.72; */
         animation-delay: -6s;
     }
 
     .cloud-3 {
         top: 40px;
-        scale: 0.55;
+        /* scale: 0.55; */
         animation-delay: -12s;
     }
 
     .cloud-4 {
         top: 68px;
-        scale: 0.9;
+        /* scale: 0.9; */
         animation-delay: -19s;
     }
 
     .cloud-5 {
         top: 18px;
-        scale: 0.62;
+        /* scale: 0.62; */
         animation-delay: -24s;
     }
 
@@ -268,5 +268,13 @@
     .house-sky {
         top: 26%;
         height: 100px;
+    }
+}
+
+/* Tablet: position the sky from the top */
+@media (min-width: 601px) and (max-width: 1100px) and (orientation: portrait) {
+    .house-sky {
+        top: 220px;
+        bottom: auto;
     }
 }
