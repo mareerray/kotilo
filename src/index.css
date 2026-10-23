@@ -290,7 +290,7 @@ textarea {
 }
 
 .item-card__title {
-    margin: 0;
+    margin: 10px 0 0 4px;
     font-size: 20px;
 }
 

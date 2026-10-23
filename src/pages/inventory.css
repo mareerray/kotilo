@@ -465,6 +465,18 @@ button:disabled {
 
 /* Small screens: stack fields, full-width Add button */
 @media (max-width: 600px) {
+    .dashboard-intro {
+        zoom: 0.95;
+    }
+
+    #inventory{
+        zoom: 0.85;
+    }
+
+    .stats, .item-filters, .item-card {
+        zoom: 0.85;
+    }
+
     .annotation-form {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -477,6 +489,10 @@ button:disabled {
     .annotation-form button {
         width: 100%;
         min-height: 48px;
+    }
+
+    .pagination {
+        zoom: 0.85;
     }
 }
 
