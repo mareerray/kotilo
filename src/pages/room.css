@@ -146,3 +146,27 @@
     position: relative;
     z-index: 1;
 }
+
+@media (max-width: 600px) {
+    .room-page > :not(.fab) {
+        zoom: 0.9;
+    }
+
+    .room-page__subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+/* Desktop/tablet only: reduce the complete house scene */
+@media (min-width: 601px) {
+    .room-page {
+        zoom: 0.9;
+    }
+}
+
+/* A little smaller on shorter desktop windows */
+@media (min-width: 601px) and (max-height: 800px) {
+    .room-page {
+        zoom: 0.85;
+    }
+}
