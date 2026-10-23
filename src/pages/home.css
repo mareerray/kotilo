@@ -215,6 +215,7 @@
 .home-room__name {
     font-size: 1rem;
     font-weight: 600;
+    color: var(--muted);
 }
 
 .home-room__hint {
@@ -340,9 +341,8 @@
     border: 2px dashed #6b8975;
     border-radius: 16px 16px 32px 32px;
     background: var(--home-green);
-    color: var(--home-ink);
+    color: var(--muted);
     font-size: 1.1rem;
-    font-weight: 800;
     text-decoration: none;
 }
 
@@ -1492,3 +1492,4 @@
         animation: none;
     }
 }
+

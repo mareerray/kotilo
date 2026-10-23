@@ -23,7 +23,7 @@ function HomePage() {
                 <span className="bird bird-3 bird-icon">🕊️</span>
             </div>
             <div className="home-house">
-    
+
 
                 {/* Decorative roof */}
                 <div className="house-roof-area" aria-hidden="true">
