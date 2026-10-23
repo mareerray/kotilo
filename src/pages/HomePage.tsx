@@ -9,7 +9,7 @@ function HomePage() {
             <header className="home-intro">
                 <p className="section-eyebrow">Your little corner of the world</p>
                 <h1 id="home-title">Welcome home.</h1>
-                <p>Choose a room and find the things you keep there.</p>
+                <p>Choose a room or explore outdoors.</p>
             </header>
             <div className="house-sky" aria-hidden="true">
                 <span className="cloud cloud-1" />
