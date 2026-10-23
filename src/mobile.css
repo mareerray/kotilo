@@ -234,19 +234,6 @@
         min-width: 0;
     }
 
-    /* Annotation inputs stay outside the photo frame */
-    .annotation-form {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-    }
-
-    .annotation-form input {
-        grid-column: 1 / -1;
-        width: 100%;
-        min-width: 0;
-    }
-
     /* Readable controls */
     .app-shell input,
     .app-shell select,

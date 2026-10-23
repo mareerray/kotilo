@@ -29,6 +29,18 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
         ? supabase.storage.from('item-photos').getPublicUrl(item.photo_path).data.publicUrl
         : null;
 
+    function handleDelete() {
+        const confirmed = window.confirm(
+            `Delete "${item.name}"?\n\nThis action cannot be undone.`
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        onDelete(item.id);
+    }
+
     function startEditing() {
         setDraftItem(item);
         setNewPhoto(null);
@@ -281,7 +293,7 @@ function ItemCard({ item, onDelete, onUpdate, onAnnotationsChange }: ItemCardPro
                 <button type="button" className="btn" onClick={startEditing}>
                     <Pencil size={16} /> Edit
                 </button>
-                <button type="button" className="btn btn--danger" onClick={() => onDelete(item.id)}>
+                <button type="button" className="btn btn--danger" onClick={handleDelete}>
                     <Trash2 size={16} /> Delete
                 </button>
             </footer>

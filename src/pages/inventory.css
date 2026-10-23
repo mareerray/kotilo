@@ -440,12 +440,56 @@ button:disabled {
 }
 
 .annotation-form {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 4px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: stretch;
+    gap: 8px;
     margin-top: 8px;
+    padding: 8px;
     background: var(--muted);
-    padding: 6px 8px;
-    font-size: clamp(8px, 3cqw, 12px);
     border-radius: 8px;
+}
+
+.annotation-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+}
+
+.annotation-form button {
+    min-height: 44px;
+    padding: 8px 18px;
+    white-space: nowrap;
+}
+
+/* Small screens: stack fields, full-width Add button */
+@media (max-width: 600px) {
+    .annotation-form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .annotation-form input {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .annotation-form button {
+        width: 100%;
+        min-height: 48px;
+    }
+}
+
+/* Desktop/tablet only: reduce the complete house scene */
+@media (min-width: 601px) {
+    #inventory {
+        zoom: 0.87;
+    }
+}
+
+/* A little smaller on shorter desktop windows */
+@media (min-width: 601px) and (max-height: 800px) {
+    #inventory {
+        zoom: 0.75;
+    }
 }

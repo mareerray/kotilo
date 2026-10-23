@@ -1,0 +1,66 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 180 100"
+>
+    <defs>
+        <path
+            id="cloud-shape"
+            d="
+                M28 87
+
+                C13 87 5 79 7 69
+                C8 59 18 53 29 56
+                C26 42 37 32 49 36
+                C47 19 61 8 74 14
+                C83 17 88 26 88 36
+                C99 23 115 27 120 41
+                C132 33 147 41 146 55
+                C159 50 172 59 172 71
+                C172 81 163 87 151 87
+
+                C148 96 135 98 126 89
+                C119 99 103 99 95 89
+                C86 99 70 98 64 88
+                C54 97 38 96 34 86
+                Q31 87 28 87
+
+                Z
+            "
+        />
+
+        <clipPath id="cloud-clip">
+            <use href="#cloud-shape"/>
+        </clipPath>
+    </defs>
+
+    <g clip-path="url(#cloud-clip)">
+        <!-- Darker pink underside -->
+        <use href="#cloud-shape" fill="#e5b9c8"/>
+
+        <!-- Light upper rim -->
+        <use
+            href="#cloud-shape"
+            transform="translate(-2 -10)"
+            fill="#fff3f3"
+        />
+
+        <!-- Main airy pink layer -->
+        <use
+            href="#cloud-shape"
+            transform="translate(2 -5)"
+            fill="#f9e5e5"
+        />
+    </g>
+
+    <!-- Small curved highlights between puffs -->
+    <g
+        fill="none"
+        stroke="#fff3f3"
+        stroke-width="2.5"
+        stroke-linecap="round"
+    >
+        <path d="M45 50 C46 43 54 41 59 46"/>
+        <path d="M78 46 C79 39 86 36 92 41"/>
+        <path d="M119 57 C121 50 129 49 133 54"/>
+    </g>
+</svg>

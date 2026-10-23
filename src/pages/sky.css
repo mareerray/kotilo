@@ -13,34 +13,21 @@
 
 .cloud {
     position: absolute;
-    width: 134px;
-    height: 32px;
-    border-radius: 999px;
-    background: var(--clouds, #f9e5e5);
-    box-shadow: 0 6px 10px rgb(52 72 61 / 24%);
+    width: 150px;
+    height: 84px;
+
+    background: url('/cloud-pink.svg') center / contain no-repeat;
+    border-radius: 0;
+    box-shadow: none;
+    filter: none;
+
     animation: drift 55s linear infinite;
 }
 
+/* Disable the old CSS bumps */
 .cloud::before,
 .cloud::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    background: inherit;
-}
-
-.cloud::before {
-    width: 58px;
-    height: 58px;
-    top: -36px;
-    left: 20px;
-}
-
-.cloud::after {
-    width: 42px;
-    height: 42px;
-    top: -22px;
-    right: 20px;
+    content: none;
 }
 
 .cloud-1 {
@@ -51,26 +38,26 @@
 .cloud-2 {
     top: 70px;
     left: -180px;
-    scale: 0.72;
+    transform: scale(0.72);
     animation-delay: -9s;
 }
 
 .cloud-3 {
-    top: 42px;
+    top: 0px;
     left: -240px;
     transform: scale(0.55);
     animation-delay: -17s;
 }
 
 .cloud-4 {
-    top: 90px;
+    top: 40px;
     left: -300px;
     transform: scale(0.8);
     animation-delay: -8s;
 }
 
 .cloud-5 {
-    top: 36px;
+    top: 6px;
     left: -360px;
     transform: scale(0.62);
     animation-delay: -38s;
@@ -90,7 +77,7 @@
 .bird {
     position: absolute;
     font-size: 1.5rem;
-    opacity: 0.65;
+    opacity: 0.85;
     animation: fly-across 34s linear infinite;
 }
 
@@ -160,23 +147,19 @@
     }
 
     .cloud {
-        width: 80px;
-        height: 25px;
+        width: 100px;
+        height: 35px;
         animation-duration: 20s;
     }
-
-    .cloud::before {
-        width: 30px;
-        height: 30px;
-        top: -18px;
-        left: 16px;
+    
+    .cloud__bottom {
+        height: 20px;
+        bottom: -7px;
     }
 
-    .cloud::after {
-        width: 21px;
-        height: 21px;
-        top: -9px;
-        right: 15px;
+    .cloud__bottom::before,
+    .cloud__bottom::after {
+        height: 17px;
     }
 
     .cloud-1,
@@ -206,7 +189,7 @@
 
     .cloud-4 {
         top: 68px;
-        scale: 0.8;
+        scale: 0.9;
         animation-delay: -19s;
     }
 
