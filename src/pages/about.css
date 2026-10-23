@@ -153,6 +153,7 @@
     .about-kotilo__intro,
     .about-features p {
         line-height: 1.6;
+        font-size: 0.9rem;
     }
 
     .cozy-scene {
