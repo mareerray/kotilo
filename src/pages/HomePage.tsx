@@ -27,117 +27,123 @@ function HomePage() {
                 <span className="bird bird-2 bird-icon">🕊️</span>
                 <span className="bird bird-3 bird-icon">🕊️</span>
             </div>
-            <div className="home-house">
-                <HouseGreenery />
+            <div className="home-landscape">
+                {/* Fence behind the house and greenery */}
+                <div className="home-fence" aria-hidden="true" />
+                
+                <div className="home-house">
+                    <HouseGreenery />
 
-                {/* Decorative roof */}
-                <div className="house-roof-area" aria-hidden="true">
+                    {/* Decorative roof */}
+                    <div className="house-roof-area" aria-hidden="true">
 
 
-                    <div className="house-chimney">
-                        <span className="chimney-smoke chimney-smoke--one" />
-                        <span className="chimney-smoke chimney-smoke--two" />
-                        <span className="chimney-smoke chimney-smoke--three" />
+                        <div className="house-chimney">
+                            <span className="chimney-smoke chimney-smoke--one" />
+                            <span className="chimney-smoke chimney-smoke--two" />
+                            <span className="chimney-smoke chimney-smoke--three" />
+                        </div>
+
+                        <div className="house-roof">
+                            <span className="house-roof__window" />
+                        </div>
                     </div>
 
-                    <div className="house-roof">
-                        <span className="house-roof__window" />
-                    </div>
-                </div>
+                    {/* Indoor rooms */}
+                    <div className="home-map" aria-label="Choose a room">
+                        {rooms
+                            .filter((room) => room.slug !== 'outdoor')
+                            .map((room) => {
+                                const Icon = roomIcons[room.name];
 
-                {/* Indoor rooms */}
-                <div className="home-map" aria-label="Choose a room">
+                                return (
+                                    <Link
+                                        key={room.id}
+                                        to={`/rooms/${room.id}`}
+                                        className={`home-room home-room--${room.slug}`}
+                                    >
+                                        <span className="room-window" aria-hidden="true" />
+
+                                        {Icon && (
+                                            <Icon
+                                                className="home-room__icon"
+                                                strokeWidth={1.5}
+                                                aria-hidden="true"
+                                            />
+                                        )}
+
+                                        <span className="home-room__name">
+                                            {room.name}
+                                        </span>
+                                    </Link>
+                                );
+                            })}                </div>
+
+                    {/* Decorative entrance */}
+                    <div className="house-entrance" aria-hidden="true">
+                        <span className="house-door" />
+                    </div>
+
+                    {/* Outdoor is outside the house */}
                     {rooms
-                        .filter((room) => room.slug !== 'outdoor')
-                        .map((room) => {
-                            const Icon = roomIcons[room.name];
+                        .filter((room) => room.slug === 'outdoor')
+                        .map((room) => (
+                            <Link
+                                key={room.id}
+                                to={`/rooms/${room.id}`}
+                                className="house-garden"
+                            >
+                                {/* Cute garden decorations */}
+                                <span className="garden-birdhouse" aria-hidden="true">
+                                    <span className="garden-birdhouse__hole" />
+                                </span>
 
-                            return (
-                                <Link
-                                    key={room.id}
-                                    to={`/rooms/${room.id}`}
-                                    className={`home-room home-room--${room.slug}`}
-                                >
-                                    <span className="room-window" aria-hidden="true" />
+                                <span className="garden-planter garden-planter--left" aria-hidden="true">
+                                    <span className="garden-planter__flowers" />
+                                </span>
 
-                                    {Icon && (
-                                        <Icon
-                                            className="home-room__icon"
-                                            strokeWidth={1.5}
-                                            aria-hidden="true"
-                                        />
-                                    )}
+                                <span className="garden-planter garden-planter--right" aria-hidden="true">
+                                    <span className="garden-planter__flowers" />
+                                </span>
 
-                                    <span className="home-room__name">
-                                        {room.name}
-                                    </span>
-                                </Link>
-                            );
-                        })}                </div>
+                                <span className="garden-flower garden-flower--pink" aria-hidden="true" />
+                                <span className="garden-flower garden-flower--yellow" aria-hidden="true" />
+                                <span className="garden-flower garden-flower--blue" aria-hidden="true" />
+                                <span className="garden-flower garden-flower--white" aria-hidden="true" />
+                                {/* Garden path */}
+                                <span className="garden-path" aria-hidden="true">
+                                    <span className="garden-path__stone garden-path__stone--1" />
+                                    <span className="garden-path__stone garden-path__stone--2" />
+                                    <span className="garden-path__stone garden-path__stone--3" />
+                                </span>
 
-                {/* Decorative entrance */}
-                <div className="house-entrance" aria-hidden="true">
-                    <span className="house-door" />
-                </div>
+                                {/* Watering can */}
+                                <span className="garden-watering-can" aria-hidden="true">
+                                    <span className="garden-watering-can__spout" />
+                                </span>
 
-                {/* Outdoor is outside the house */}
-                {rooms
-                    .filter((room) => room.slug === 'outdoor')
-                    .map((room) => (
-                        <Link
-                            key={room.id}
-                            to={`/rooms/${room.id}`}
-                            className="house-garden"
-                        >
-                            {/* Cute garden decorations */}
-                            <span className="garden-birdhouse" aria-hidden="true">
-                                <span className="garden-birdhouse__hole" />
-                            </span>
+                                {/* Butterfly */}
+                                <span className="garden-butterfly" aria-hidden="true"> <span /> </span>
+                                <span className="garden-butterfly garden-butterfly--blue" aria-hidden="true">
+                                    <span />
+                                </span>
+                                <span>{room.name}</span>
+                            </Link>
 
-                            <span className="garden-planter garden-planter--left" aria-hidden="true">
-                                <span className="garden-planter__flowers" />
-                            </span>
+                        ))}
 
-                            <span className="garden-planter garden-planter--right" aria-hidden="true">
-                                <span className="garden-planter__flowers" />
-                            </span>
+                    {/* Decorative plants beside the house */}
+                    <div className="house-plants" aria-hidden="true">
+                        <span className="house-bush house-bush--left" />
 
-                            <span className="garden-flower garden-flower--pink" aria-hidden="true" />
-                            <span className="garden-flower garden-flower--yellow" aria-hidden="true" />
-                            <span className="garden-flower garden-flower--blue" aria-hidden="true" />
-                            <span className="garden-flower garden-flower--white" aria-hidden="true" />
-                            {/* Garden path */}
-                            <span className="garden-path" aria-hidden="true">
-                                <span className="garden-path__stone garden-path__stone--1" />
-                                <span className="garden-path__stone garden-path__stone--2" />
-                                <span className="garden-path__stone garden-path__stone--3" />
-                            </span>
-
-                            {/* Watering can */}
-                            <span className="garden-watering-can" aria-hidden="true">
-                                <span className="garden-watering-can__spout" />
-                            </span>
-
-                            {/* Butterfly */}
-                            <span className="garden-butterfly" aria-hidden="true"> <span /> </span>
-                            <span className="garden-butterfly garden-butterfly--blue" aria-hidden="true">
-                                <span />
-                            </span>
-                            <span>{room.name}</span>
-                        </Link>
-
-                    ))}
-
-                {/* Decorative plants beside the house */}
-                <div className="house-plants" aria-hidden="true">
-                    <span className="house-bush house-bush--left" />
-
-                    <div className="house-tree-group">
-                        <span className="house-tree" />
-                        <span className="house-bush house-bush--right-front" />
+                        <div className="house-tree-group">
+                            <span className="house-tree" />
+                            <span className="house-bush house-bush--right-front" />
+                        </div>
                     </div>
                 </div>
             </div>
+
             <Link className="home-inventory-link" to="/inventory">
                 View all belongings →
             </Link>

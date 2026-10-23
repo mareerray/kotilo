@@ -36,16 +36,16 @@
 @media (max-width: 600px) {
     .house-greenery__side {
         bottom: 45px;
-        width: 100px;
+        width: 120px;
     }
 
     .house-greenery__side--left {
-        left: -8px;
+        left: -40px;
     }
 
     .house-greenery__side--right {
-        right: -8px;
-        width: 95px;
+        right: -38px;
+        width: 110px;
     }
 }
 
@@ -184,7 +184,7 @@
     }
 
     .house-tree-group {
-        right: -6px;
+        right: -20px;
         bottom: 110px;
         transform: scale(0.6);
         transform-origin: bottom right;
@@ -345,3 +345,46 @@
             transparent 3px
         );
 }
+
+/*------------------ Garden fence ------------------*/
+
+.home-landscape {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+}
+
+.home-landscape > .home-fence {
+    position: absolute;
+    top: auto;
+    bottom: 90px;
+
+   /* Center on the house, but extend beyond its container */
+    left: 50%;
+    right: auto;
+    width: min(1100px, calc(100vw - 48px));
+    transform: translateX(-50%);
+
+    height: 72px;
+    z-index: 0;
+
+    background-image: url('/garden-fence.svg');
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-size: 40px 72px;
+
+    pointer-events: none;
+}
+
+.home-landscape > .home-house {
+    position: relative;
+    z-index: 1;
+}
+
+/* Keep the new decoration desktop-only for now */
+@media (max-width: 600px) {
+    .home-landscape > .home-fence {
+        display: none;
+    }
+}
+
