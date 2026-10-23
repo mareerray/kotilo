@@ -1,26 +1,26 @@
 :root {
-  --bg: #fff7ed;
-  --card: #ffffff;
-  --card-surface: #fbf8fa;
-  --clouds: #f9e5e5e6;
-  --accent: #f9a8d4;
-  --accent-soft: #fce7f3;
-  --text: #4a3f6b;
-  --muted: #8b8399;
-  --radius: 18px;
-  --shadow: 0 8px 24px rgba(249, 168, 212, 0.25);
+    --bg: #fff7ed;
+    --card: #ffffff;
+    --card-surface: #fbf8fa;
+    --clouds: #f9e5e5;
+    --accent: #f9a8d4;
+    --accent-soft: #fce7f3;
+    --text: #4a3f6b;
+    --muted: #8b8399;
+    --radius: 18px;
+    --shadow: 0 8px 24px rgba(249, 168, 212, 0.25);
 
-  --surface: var(--card);
-  --primary: var(--accent);
-  --primary-soft: var(--accent-soft);
-  --text-muted: var(--muted);
-  --border: #f5e1ec;
+    --surface: var(--card);
+    --primary: var(--accent);
+    --primary-soft: var(--accent-soft);
+    --text-muted: var(--muted);
+    --border: #f5e1ec;
 
-  --accent-strong: #be185d;
-  --danger: #dc2626;
-  --danger-soft: #fef2f2;
+    --accent-strong: #be185d;
+    --danger: #dc2626;
+    --danger-soft: #fef2f2;
 
-  --font-main: "Nunito", system-ui, sans-serif;
+    --font-main: "Nunito", system-ui, sans-serif;
 
     max-width: 960px;
     margin: 0 auto;
@@ -29,19 +29,19 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  overflow-x: clip;
+    overflow-x: clip;
 }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-main);
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-main);
 }
 
 .app-shell {
@@ -51,20 +51,20 @@ body {
 }
 
 .app-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: var(--primary);
-  font-size: 2rem;
-  margin: 24px auto 16px;
-  width: min(840px, 92%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--primary);
+    font-size: 2rem;
+    margin: 24px auto 16px;
+    width: min(840px, 92%);
 }
 
 .logo {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
 }
 
 /* -------- Sound toggle ------------ */
@@ -432,7 +432,8 @@ textarea {
 }
 
 .fab--home {
-    bottom: 8rem; /* sits above the + button */
+    bottom: 8rem;
+    /* sits above the + button */
     background: var(--primary, #d1fae5);
     color: #fff;
     border: none;
@@ -451,7 +452,7 @@ textarea {
 }
 
 .fab--top {
-    bottom: 1rem; 
+    bottom: 1rem;
     background: var(--primary, #d1fae5);
     color: #fff;
     font-size: 1.5rem;
